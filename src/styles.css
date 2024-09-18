@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar {
+    width: 10px;  /* Width of the scrollbar */
+}
+
+/* Scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+    background: #666;  /* Color of the scrollbar */
+    border-radius: 20px;  /* Rounded edges */
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+    background: #ddd;  /* Background color of the scrollbar track */
+    border-radius: 20px;  /* Rounded edges */
+}

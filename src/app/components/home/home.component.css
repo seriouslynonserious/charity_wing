@@ -1,0 +1,233 @@
+/* Team Item Styles */
+.team-item img {
+    position: relative;
+    top: 0;
+    transition: top .5s ease;
+}
+
+.team-item:hover img {
+    top: -30px;
+}
+
+.team-item .team-text {
+    position: relative;
+    height: 100px;
+    transition: margin-top .5s ease, height .5s ease;
+}
+
+.team-item:hover .team-text {
+    margin-top: -60px;
+    height: 160px;
+}
+
+.team-item .team-text .team-social {
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.team-item:hover .team-text .team-social {
+    opacity: 1;
+}
+
+.team-item .team-social .btn {
+    display: inline-flex;
+    color: var(--primary);
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+.team-item .team-social .btn:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+}
+
+/* Causes Item Styles */
+.causes-item .progress {
+    height: 5px;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.causes-item .progress .progress-bar {
+    position: relative;
+    overflow: visible;
+    width: 0;
+    border-radius: 0;
+    transition: width 5s ease;
+}
+
+.causes-item .progress .progress-bar span {
+    position: absolute;
+    top: -7px;
+    right: 0;
+    width: 40px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
+.causes-item .causes-overlay {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .5);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .5s ease, height .5s ease;
+}
+
+.causes-item:hover .causes-overlay {
+    height: 100%;
+    opacity: 1;
+}
+
+/* Service Item Styles */
+.service-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .06);
+}
+
+/* Donate Section */
+.donate {
+    position: relative;
+    background: rgb(30 122 129 / 18%);
+    opacity: 2;
+    overflow: hidden; /* Ensure no overflow if elements go beyond container */
+}
+
+.donate::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(8px); /* Blur effect applied only to the background */
+    z-index: -1; /* Place the blurred background behind the content */
+}
+
+/* Ensure the content (text, form, etc.) remains clear and above the blurred background */
+.donate .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Button Styles */
+.btn-group .btn-light:hover,
+.btn-group input[type="radio"]:checked+label {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn {
+    font-weight: 500;
+    transition: color .5s ease, background .5s ease;
+}
+
+.btn.btn-primary,
+.btn.btn-outline-primary:hover {
+    color: #FFFFFF;
+}
+
+.btn.btn-primary:hover {
+    color: var(--primary);
+    background: transparent;
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .team-item .team-text {
+        height: auto;
+    }
+
+    .team-item:hover .team-text {
+        margin-top: 0;
+        height: auto;
+    }
+
+    .causes-item .progress .progress-bar span {
+        font-size: 10px;
+    }
+
+    .btn-square {
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-sm-square {
+        width: 28px;
+        height: 28px;
+    }
+
+    .btn-lg-square {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-item .team-text {
+        height: auto;
+    }
+
+    .team-item:hover .team-text {
+        margin-top: 0;
+        height: auto;
+    }
+
+    .causes-item .progress .progress-bar span {
+        font-size: 8px;
+    }
+
+    .btn-square {
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn-sm-square {
+        width: 24px;
+        height: 24px;
+    }
+
+    .btn-lg-square {
+        width: 40px;
+        height: 40px;
+    }
+}

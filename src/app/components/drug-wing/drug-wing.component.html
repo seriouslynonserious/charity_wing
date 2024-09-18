@@ -1,0 +1,235 @@
+<div class="container-xxl py-5">
+  <div class="container">
+      <div class="row g-5">
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="position-relative overflow-hidden h-100" style="min-height: 400px;">
+                  <img class="position-absolute w-100 h-100 pt-5 pe-5" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="" style="object-fit: cover;">
+                  <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="" style="width: 200px; height: 200px;">
+              </div>
+          </div>
+          <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="h-100">
+                  <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">About Us</div>
+                  <h1 class="display-6 mb-5">Uniting for a Global Cause: Helping Those Who Need Us Most</h1>
+                  <div class="bg-light border-bottom border-5 border-primary rounded p-4 mb-4">
+                      <p class="text-dark mb-2">Aliqu diam amet diam et eos. Clita erat ipsum et lorem sed stet lorem sit clita duo justo erat amet</p>
+                      <span class="text-primary">shivaay</span>
+                  </div>
+                  <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                  <a class="btn btn-primary py-2 px-3 me-3" href="">
+                      Learn More
+                      <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+                  <a class="btn btn-outline-primary py-2 px-3" href="">
+                      Contact Us
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!--about us end -->
+
+
+
+
+<!--form start -->
+
+
+
+<div class="donation-form-container">
+  <form class="donation-form shadow p-4 bg-white rounded" #patientForm="ngForm" (ngSubmit)="addPatient(patientForm)" >
+  <h2 class="text-center mb-4">Drug Wing</h2>
+  <p class="text-center mb-4">Support patients who can't afford their medicines. Register a patient today.</p>
+
+  
+    <div class="form-group">
+      <label for="name" >Name:</label>
+      <input id="name" [(ngModel)]="name" name="name" required minlength="2" #nameInput="ngModel" class="form-control">
+      <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+        <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+        <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters long.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="condition">Condition:</label>
+      <input id="condition" [(ngModel)]="condition" name="condition" required minlength="3" #conditionInput="ngModel" class="form-control">
+      <div *ngIf="conditionInput.invalid && conditionInput.touched" class="text-danger">
+        <small *ngIf="conditionInput.errors?.['required']">Condition is required.</small>
+        <small *ngIf="conditionInput.errors?.['minlength']">Condition must be at least 3 characters long.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="contact" >Contact:</label>
+      <input type="tel" id="contact" [(ngModel)]="contact" name="contact" required pattern="^[0-9]{10}$" #contactInput="ngModel" class="form-control">
+      <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
+        <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
+        <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact number.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age" >Age:</label>
+      <input type="number" id="age" [(ngModel)]="age" name="age" required min="1" max="120" #ageInput="ngModel" class="form-control">
+      <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
+        <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
+        <small *ngIf="ageInput.errors?.['min']">Age must be at least 1.</small>
+        <small *ngIf="ageInput.errors?.['max']">Age must be below 120.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gender" >Gender:</label>
+      <select id="gender" [(ngModel)]="gender" name="gender" required #genderInput="ngModel" class="form-control">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <div *ngIf="genderInput.invalid && genderInput.touched" class="text-danger">
+        <small *ngIf="genderInput.errors?.['required']">Gender is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address" >Address:</label>
+      <input id="address" [(ngModel)]="address" name="address" required minlength="5" #addressInput="ngModel" class="form-control">
+      <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+        <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
+        <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 5 characters long.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="medicineNeeded" >Medicine Needed:</label>
+      <input id="medicineNeeded" [(ngModel)]="medicineNeeded" name="medicineNeeded" required #medicineNeededInput="ngModel" class="form-control">
+      <div *ngIf="medicineNeededInput.invalid && medicineNeededInput.touched" class="text-danger">
+        <small *ngIf="medicineNeededInput.errors?.['required']">Medicine needed is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="report" >Upload Report:</label>
+      <input type="file" id="report" (change)="onFileSelected($event)" required class="form-control">
+      <div *ngIf="!reportUrl && patientForm.submitted" class="text-danger">Report is required</div>
+
+    </div>
+
+    
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="patientForm.invalid">Register Patient</button>
+    
+  </form>
+</div>
+
+
+<section class="container py-5">
+
+<h3 class ="text-center mb-4">Patient List</h3>
+<table class="table table-hover table-bordered table-striped animate__animated animate__fadeInUp">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Condition</th>
+      <th>Contact</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th>Medicine Needed</th>
+      <th>Report</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients$ | async">
+      <td>{{ patient.name }}</td>
+      <td>{{ patient.condition }}</td>
+      <td>{{ patient.contact }}</td>
+      <td>{{ patient.age }}</td>
+      <td>{{ patient.gender }}</td>
+      <td>{{ patient.address }}</td>
+      <td>{{ patient.medicineNeeded }}</td>
+      <td><img [src]="patient.reportUrl" alt="Report Image" width="50"></td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Team Members</div>
+            <h1 class="display-6 mb-5">Let's Meet With Our Ordinary Soldiers</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>shivam </h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
