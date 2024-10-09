@@ -8,7 +8,7 @@ interface BloodDonor {
   bloodGroup: string;
   contact: string;
   address: string;
-  previousDiseases: string;
+  donationDate: string;
 }
 
 @Injectable({

@@ -1,18 +1,22 @@
-/* src/app/components/admin/admin.component.css */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-  
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.table {
+  width: 80%;
+  margin: auto;
+}
+h2, h3 {
+  color: #333;
+}
+nav ul {
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+}
+button {
+  margin-bottom: 15px;
+}

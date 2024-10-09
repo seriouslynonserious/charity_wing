@@ -6,7 +6,7 @@ interface Donation {
   amount: number;
   email: string;
   message?: string;
-  panCard: string;
+  
   donationDate: string;
 }
 

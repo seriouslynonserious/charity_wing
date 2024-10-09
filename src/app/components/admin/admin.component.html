@@ -1,59 +1,323 @@
 <!-- src/app/components/admin/admin.component.html -->
-<h2>Admin Panel</h2>
-<nav>
-  <ul>
-    <li>
-      <button (click)="toggleDonorList()">Blood Donor List</button>
+ <!-- The Navigation Bar -->
+
+<h2 class="text-center mt-4">Admin Panel</h2>
+<nav class="text-center">
+  <ul class="list-inline">
+    <li class="list-inline-item">
+      <button class="btn btn-primary" (click)="toggleDonorList()">Blood Donor List</button>
     </li>
-    <li>
-      <button (click)="togglePatientList()">Patient List</button>
+    <li class="list-inline-item">
+      <button class="btn btn-primary" (click)="togglePatientList()">Patient List</button>
     </li>
-    <li>
-      <button (click)="toggleDonationList()">Donation List</button>
+    <li class="list-inline-item">
+      <button class="btn btn-primary" (click)="toggleDonationList()">Donation List</button>
     </li>
-    <li>
-      <button (click)="toggleHairDonorList()">Hair Donor List</button>
+    <li class="list-inline-item">
+      <button class="btn btn-primary" (click)="toggleHairDonorList()">Hair Donor List</button>
     </li>
-    <!-- Add more admin options here -->
   </ul>
 </nav>
 
 <!-- Blood Donor List -->
-<div *ngIf="showDonorList">
-  <h3>Blood Donor List</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Blood Group</th>
-        <th>Contact</th>
-        <th>Address</th>
-        <th>Previous Critical Diseases</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let donor of donors$ | async">
-        <td>{{ donor.name }}</td>
-        <td>{{ donor.age }}</td>
-        <td>{{ donor.bloodGroup }}</td>
-        <td>{{ donor.contact }}</td>
-        <td>{{ donor.address }}</td>
-        <td>{{ donor.previousDiseases }}</td>
-        <td>
-          <button (click)="deleteDonor(donor.name)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donationModalLabel">Gift of Giving</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form shadow p-4 bg-white rounded" (ngSubmit)="addDonor()" #donationForm="ngForm">
+
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" [(ngModel)]="name" name="name" required minlength="2" #nameInput="ngModel"
+              class="form-control">
+            <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+              <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+              <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters long.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" [(ngModel)]="age" name="age" required min="18" max="65" #ageInput="ngModel"
+              class="form-control">
+            <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
+              <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
+              <small *ngIf="ageInput.errors?.['min']">Age must be at least 18.</small>
+              <small *ngIf="ageInput.errors?.['max']">Age must be 65 or younger.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bloodGroup">Blood Group:</label>
+            <input id="bloodGroup" [(ngModel)]="bloodGroup" name="bloodGroup" required pattern="^(A|B|AB|O)[+-]$"
+              #bloodGroupInput="ngModel" class="form-control">
+            <div *ngIf="bloodGroupInput.invalid && bloodGroupInput.touched" class="text-danger">
+              <small *ngIf="bloodGroupInput.errors?.['required']">Blood group is required.</small>
+              <small *ngIf="bloodGroupInput.errors?.['pattern']">Enter a valid blood group (e.g., A+, B-, AB+,
+                O+).</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact">Contact:</label>
+            <input type="tel" id="contact" [(ngModel)]="contact" name="contact" required pattern="^[0-9]{10}$"
+              #contactInput="ngModel" class="form-control">
+            <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
+              <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
+              <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact number.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input id="address" [(ngModel)]="address" name="address" required minlength="10" #addressInput="ngModel"
+              class="form-control">
+            <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+              <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
+              <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 10 characters long.</small>
+            </div>
+          </div>
+
+          
+
+
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!donationForm.form.valid">
+            Add Donor
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div *ngIf="showDonorList" class="">
+  <div class="text-center causes-overlay">
+    <button type="button " class="btn btn-primary text-white btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+      Open Donation Form
+      <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
+        <i class="fa fa-arrow-right"></i>
+    </div>
+    </button>
+  </div>
+  <h3 class="text-center">Blood Donor List</h3>
+  <div class="table-responsive table-container">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Blood Group</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Donation Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donor of donors$ | async">
+          <td>{{ donor.name }}</td>
+          <td>{{ donor.age }}</td>
+          <td>{{ donor.bloodGroup }}</td>
+          <td>{{ donor.contact }}</td>
+          <td>{{ donor.address }}</td>
+          <td>{{ donor.donationDate }}</td> 
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteDonor(donor.name)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+<!-- Donation List -->
+<div class="modal fade" id="donationModals" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donationModalLabel">Gift of Giving</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form shadow p-4 bg-white rounded" (ngSubmit)="makeBirthdayDonation()" #donationForm="ngForm">
+          <div class="form-group">
+            <label for="donorName">Name:</label>
+            <input type="text" id="donorName" class="form-control" [(ngModel)]="donorName" name="donorName" required>
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" class="form-control" [(ngModel)]="amount" name="amount" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="donationDate">Donation Date:</label>
+            <input type="date" id="donationDate" class="form-control" [(ngModel)]="donationDate" name="donationDate" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" class="form-control" [(ngModel)]="message" name="message" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!donationForm.form.valid">
+            Donate
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showDonationList" class="">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModals">
+      Open Donation Form
+    </button>
+  </div>
+  <h3 class="text-center">Donation List</h3>
+  <div class="table-responsive table-container">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Donor Name</th>
+          <th>Amount</th>
+           <th>Email</th>
+          <th>Message</th>
+          <th>Donation Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donation of donations$ | async">
+          <td>{{ donation.donorName }}</td>
+          <td>₹{{ donation.amount }}</td> 
+          <td>{{ donation.email }}</td>
+          <td>{{ donation.message || 'N/A' }}</td>
+          <td>{{ donation.donationDate }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteDonation(donation.donorName)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
 <!-- Patient List -->
-<div *ngIf="showPatientList">
-    <h3>Patient List</h3>
-    <table>
-      <thead>
+<div class="modal fade" id="patientdonationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="donationModalLabel">Gift of Giving</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form class="donation-form shadow p-4 bg-white rounded" #patientForm="ngForm"
+                  (ngSubmit)="addPatient(patientForm)">
+                  <h2 class="text-center mb-4">Drug Wing</h2>
+                
+                  <div class="form-group">
+                      <label for="name">Name:</label>
+                      <input id="name" [(ngModel)]="name" name="name" required minlength="2" #nameInput="ngModel"
+                          class="form-control">
+                      <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+                          <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+                          <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters
+                              long.</small>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="condition">Condition:</label>
+                      <input id="condition" [(ngModel)]="condition" name="condition" required minlength="3"
+                          #conditionInput="ngModel" class="form-control">
+                      <div *ngIf="conditionInput.invalid && conditionInput.touched" class="text-danger">
+                          <small *ngIf="conditionInput.errors?.['required']">Condition is required.</small>
+                          <small *ngIf="conditionInput.errors?.['minlength']">Condition must be at least 3 characters
+                              long.</small>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="contact">Contact:</label>
+                      <input type="tel" id="contact" [(ngModel)]="contact" name="contact" required
+                          pattern="^[0-9]{10}$" #contactInput="ngModel" class="form-control">
+                      <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
+                          <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
+                          <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact
+                              number.</small>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="age">Age:</label>
+                      <input type="number" id="age" [(ngModel)]="age" name="age" required min="1" max="120"
+                          #ageInput="ngModel" class="form-control">
+                      <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
+                          <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
+                          <small *ngIf="ageInput.errors?.['min']">Age must be at least 1.</small>
+                          <small *ngIf="ageInput.errors?.['max']">Age must be below 100.</small>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="gender">Gender:</label>
+                      <select id="gender" [(ngModel)]="gender" name="gender" required #genderInput="ngModel"
+                          class="form-control">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                      </select>
+                      <div *ngIf="genderInput.invalid && genderInput.touched" class="text-danger">
+                          <small *ngIf="genderInput.errors?.['required']">Gender is required.</small>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="address">Address:</label>
+                      <input id="address" [(ngModel)]="address" name="address" required minlength="5"
+                          #addressInput="ngModel" class="form-control">
+                      <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+                          <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
+                          <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 5 characters
+                              long.</small>
+                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" [disabled]="patientForm.invalid">Register
+                      Patient</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div> 
+
+
+
+<div *ngIf="showPatientList" >
+  <div class="text-center causes-overlay">
+    <button type="button " class="btn btn-primary text-white btn-outline-primary" data-bs-toggle="modal" data-bs-target="#patientdonationModal">
+      Open Donation Form
+      <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
+        <i class="fa fa-arrow-right"></i>
+    </div>
+    </button>
+  </div>
+  <h3 class="text-center">Patient List</h3>
+  <div class="table-responsive table-container">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>Name</th>
           <th>Condition</th>
@@ -61,8 +325,6 @@
           <th>Age</th>
           <th>Gender</th>
           <th>Address</th>
-          <th>Medicine Needed</th>
-          <th>Report</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -74,63 +336,84 @@
           <td>{{ patient.age }}</td>
           <td>{{ patient.gender }}</td>
           <td>{{ patient.address }}</td>
-          <td>{{ patient.medicineNeeded }}</td>
-          <td><img [src]="patient.reportUrl" alt="Report Image" width="50"></td>
           <td>
-            <button (click)="deletePatient(patient.name)">Delete</button>
+            <button class="btn btn-danger btn-sm" (click)="deletePatient(patient.name)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  
-
-<!-- Donation List -->
-<!-- Donation List -->
-<div *ngIf="showDonationList">
-  <h3>Donation List</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Donor Name</th>
-        <th>Amount</th>
-        <th>PAN Card</th>
-        <th>Donation Date</th>
-        <th>Email</th>
-        <th>Message</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let donation of donations$ | async">
-        <td>{{ donation.donorName }}</td>
-        <td>₹{{ donation.amount }}</td>
-        <td>{{ donation.panCard }}</td>
-        <td>{{ donation.donationDate }}</td>
-        <td>{{ donation.email }}</td>
-        <td>{{ donation.message || 'N/A' }}</td>
-        <td>
-          <button (click)="deleteDonation(donation.donorName)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 
-<div *ngIf="showHairDonorList">
-    <h3>Hair Donor List</h3>
-    <table>
-      <thead>
+
+
+<!-- Hair Donor List -->
+<div class="modal fade" id="hairDonationModal" tabindex="-1" aria-labelledby="hairDonationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hairDonationModalLabel">Hair to Care Donation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form" (ngSubmit)="addDonorhair()" #hairDonationForm="ngForm">
+          <div class="mb-3">
+            <label for="donorName" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="donorName" required [(ngModel)]="donor.name" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="donorContact" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="donorContact" required [(ngModel)]="donor.contact" name="contact">
+          </div>
+          <div class="mb-3">
+            <label for="donorEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="donorEmail" required [(ngModel)]="donor.email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="donorAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="donorAge" required [(ngModel)]="donor.age" name="age">
+          </div>
+          <div class="mb-3">
+            <label for="donorGender" class="form-label">Gender</label>
+            <select class="form-select" id="donorGender" required [(ngModel)]="donor.gender" name="gender">
+              <option value="" disabled selected>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="hairLength" class="form-label">Hair Length (in inches)</label>
+            <input type="number" class="form-control" id="hairLength" required [(ngModel)]="donor.hairLength" name="hairLength">
+          </div>
+         
+          <button type="submit" class="btn btn-primary">Submit Donation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showHairDonorList" class="">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hairDonationModal">
+      Open Hair Donation Form
+    </button>
+  </div>
+  <h3 class="text-center">Hair Donor List</h3>
+  <div class="table-responsive table-container">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>Name</th>
           <th>Contact</th>
-          <th>Address</th>
+          <th>Email</th>
           <th>Age</th>
           <th>Gender</th>
           <th>Hair Length</th>
-          <th>Hair Type</th>
-          <th>Chemical Treatment</th>
+          <th>Donation Date</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -138,16 +421,16 @@
         <tr *ngFor="let donor of hairDonors$ | async">
           <td>{{ donor.name }}</td>
           <td>{{ donor.contact }}</td>
-          <td>{{ donor.address }}</td>
+          <td>{{ donor.email }}</td>
           <td>{{ donor.age }}</td>
           <td>{{ donor.gender }}</td>
           <td>{{ donor.hairLength }} inches</td>
-          <td>{{ donor.hairType }}</td>
-          <td>{{ donor.chemicalTreatment || 'None' }}</td>
+          <td>{{ donor.donationDate }}</td>
           <td>
-            <button (click)="deleteHairDonor(donor.name)">Delete</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteHairDonor(donor.name)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>

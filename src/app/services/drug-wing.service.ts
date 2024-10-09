@@ -8,8 +8,7 @@ interface Patient {
   age: number;
   gender: string;
   address: string;
-  medicineNeeded: string;
-  reportUrl: string;
+  
 }
 
 @Injectable({

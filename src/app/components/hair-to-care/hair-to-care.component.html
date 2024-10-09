@@ -34,86 +34,176 @@
   </div>
 </div>
 
+<div class="container-xxl bg-light my-5 py-5">
+  <div class="container py-5">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+          <div class="d-inline-block rounded-pill bg-danger text-white py-1 px-3 mb-3">Feature Causes</div>
+          <h1 class="display-6 mb-5">"Donate Blood, Hair, and Gifts - Spread Hope and Save Lives."</h1>
+      </div>
+      <div class="row g-4 justify-content-center animate__animated animate__fadeInUp">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="causes-item d-flex flex-column bg-white border-top border-5 border-danger rounded-top overflow-hidden h-100">
+                  <div class="text-center p-4 pt-0">
+                      <div class="d-inline-block bg-danger text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
+                          <small>Education</small>
+                      </div>
+                      <h5 class="mb-3">Donation For Needy Children</h5>
+                      <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                      
+                  </div>
+                  <div class="position-relative mt-auto">
+                      <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                      <div class="causes-overlay">
+                          <a class="btn text-white btn-outline-primary" href="">
+                              Read More
+                              <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
+                                  <i class="fa fa-arrow-right"></i>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="causes-item d-flex flex-column bg-white border-top border-5 border-danger rounded-top overflow-hidden h-100">
+                  <div class="text-center p-4 pt-0">
+                      <div class="d-inline-block bg-danger text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
+                          <small>HAIR DONATION FORM</small>
+                      </div>
+                      <h5 class="mb-3">Ensure Wigs for Cancer Patients</h5>
+                      <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                     
+                  </div>
+                  <div class="position-relative mt-auto">
+                      <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
 
-
-<div class="donation-form-container">
-  <form class="donation-form shadow p-4 bg-white rounded" (ngSubmit)="addHairDonor()" #donationForm="ngForm">
-<h2 class="text-center mb-4">Hair to Care</h2>
-<p class="text-center mb-4">Your hair donation can bring a smile to someone undergoing cancer treatment.</p>
-
-
-  <div class="form-group">
-    <label for="donorName">Name:</label>
-    <input type="text" id="donorName" class="form-control" [(ngModel)]="name" name="name" required>
+                            <div class="text-center causes-overlay">
+                              <button type="button " class="btn btn-primary text-white btn-outline-primary" data-bs-toggle="modal" data-bs-target="#hairDonationModal">
+                                Open Hair Donation Form
+                                <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
+                                  <i class="fa fa-arrow-right"></i>
+                              </div>
+                              </button>
+                            </div>
+                   
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="causes-item d-flex flex-column bg-white border-top border-5 border-danger rounded-top overflow-hidden h-100">
+                  <div class="text-center p-4 pt-0">
+                      <div class="d-inline-block bg-danger text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
+                          <small>HAIR DONORS LIST</small>
+                      </div>
+                      <h5 class="mb-3">Donors Availability</h5>
+                      <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                     
+                  </div>
+                  <div class="position-relative mt-auto">
+                      <img class="img-fluid" src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c" alt="">
+                      
+                          
+                            <div class="causes-overlay text-center mb-4 btn text-white btn-outline-primary">
+                              <button type="button" class="btn btn-primary" (click)="openDonorList()">
+                                View hair donor list
+                                <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
+                                  <i class="fa fa-arrow-right"></i>
+                              </div>
+                            </button> 
+                            </div>
+                          
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-
-  <div class="form-group">
-    <label>Contact:</label>
-    <input type="number" class="form-control" [(ngModel)]="contact" name="contact" required>
-  </div>
-  <div class="form-group">
-    <label>Address:</label>
-    <input type="text"  class="form-control" [(ngModel)]="address" name="address" required>
-  </div>
-  <div class="form-group">
-    <label >Age:</label>
-    <input type="number" class="form-control" [(ngModel)]="age" name="age" required>
-  </div>
-  <div class="form-group">
-    <label>Gender:</label>
-    <select class="form-control" [(ngModel)]="gender" name="gender" required>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-      <option value="Other">Other</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Hair Length (in inches):</label>
-    <input type="number" class="form-control" [(ngModel)]="hairLength" name="hairLength" required>
-  </div>
-  <div class="form-group">
-    <label>Hair Type:</label>
-    <input type="text" [(ngModel)]="hairType" class="form-control" name="hairType" required>
-  </div>
-  <div class="form-group">
-    <label>Chemical Treatment:</label>
-    <input [(ngModel)]="chemicalTreatment" class="form-control" name="chemicalTreatment">
-  </div>
-  <button type="submit" class="btn btn-primary btn-block" [disabled]="!donationForm.form.valid">Add Hair Donor</button>
-</form>
 </div>
 
-<section class="container py-5">
-  <h3 class ="text-center mb-4">Hair Donor List</h3>
-  <table class="table table-hover table-bordered table-striped animate__animated animate__fadeInUp">
-    <thead class="table-dark">
-      <tr>
-        <th>Name</th>
-        <th>Contact</th>
-        <th>Address</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Hair Length</th>
-        <th>Hair Type</th>
-        <th>Chemical Treatment</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let donor of hairDonors$ | async">
-        <td>{{ donor.name }}</td>
-        <td>{{ donor.contact }}</td>
-        <td>{{ donor.address }}</td>
-        <td>{{ donor.age }}</td>
-        <td>{{ donor.gender }}</td>
-        <td>{{ donor.hairLength }} inches</td>
-        <td>{{ donor.hairType }}</td>
-        <td>{{ donor.chemicalTreatment || 'None' }}</td>
-        
-      </tr>
-    </tbody>
-  </table>
-</section>
+
+
+<!-- Initial Modal -->
+<!-- Initial Modal -->
+<div class="modal fade animate__animated animate__fadeIn" id="initialModal" tabindex="-1" aria-labelledby="initialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered animate__animated animate__zoomIn">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="initialModalLabel">Welcome to hair-to-care</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="text-center">
+            <!-- Intro Message -->
+            <p class="lead mb-4 animate__animated animate__fadeInUp">Please donate hair, it will bring smile to children.</p>
+            
+            <!-- Open Donation Form Button -->
+            <button type="button" class="btn btn-dark btn-lg mb-3 animate__animated animate__fadeInUp" (click)="openDonationForm()">
+              Open Donation Form
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Hair Donation Modal -->
+<div class="modal fade" id="hairDonationModal" tabindex="-1" aria-labelledby="hairDonationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hairDonationModalLabel">Hair to Care Donation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form" (ngSubmit)="addDonorhair()" #hairDonationForm="ngForm">
+          <div class="mb-3">
+            <label for="donorName" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="donorName" required [(ngModel)]="donor.name" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="donorContact" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="donorContact" required [(ngModel)]="donor.contact" name="contact">
+          </div>
+          <div class="mb-3">
+            <label for="donorEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="donorEmail" required [(ngModel)]="donor.email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="donorAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="donorAge" required [(ngModel)]="donor.age" name="age">
+          </div>
+          <div class="mb-3">
+            <label for="donorGender" class="form-label">Gender</label>
+            <select class="form-select" id="donorGender" required [(ngModel)]="donor.gender" name="gender">
+              <option value="" disabled selected>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="hairLength" class="form-label">Hair Length (in inches)</label>
+            <input type="number" class="form-control" id="hairLength" required [(ngModel)]="donor.hairLength" name="hairLength">
+          </div>
+         
+          <button type="submit" class="btn btn-primary">Submit Donation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Hair Donor List Modal -->
+
+
+
+
+
+
+
 
   <div class="container-xxl py-5">
     <div class="container">

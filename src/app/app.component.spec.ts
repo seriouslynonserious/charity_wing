@@ -8,6 +8,7 @@ declare var $: any; // Declaring jQuery
 })
 export class AppComponent implements AfterViewInit {
   title = 'apps';
+imageUrl: any;
 
   ngAfterViewInit() {
     this.initSpinner();

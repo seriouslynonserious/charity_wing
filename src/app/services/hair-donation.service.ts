@@ -4,12 +4,11 @@ import { BehaviorSubject } from 'rxjs';
 interface HairDonor {
   name: string;
   contact: string;
-  address: string;
-  age: number;
-  gender: string;
+  email: string; // Added email field
+  age: number; // Added age field
+  gender: string; // Added gender field
   hairLength: number;
-  hairType: string;
-  chemicalTreatment?: string;
+  donationDate: string; // Added donation date field
 }
 
 @Injectable({

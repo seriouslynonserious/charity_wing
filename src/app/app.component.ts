@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 declare var $: any; // Declaring jQuery
 
 @Component({
@@ -70,6 +70,15 @@ export class AppComponent implements AfterViewInit {
       });
     }, { offset: '80%' });
   }
+  
+  imageUrl: any;
 
+  constructor(private sanitizer: DomSanitizer) {
+    this.imageUrl = this.sanitize('https://drive.google.com/uc?export=view&id=1lMddS1RhdzWuP8t6OS2baZUJxa2ZWHQv');
+  }
+
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
  
 }

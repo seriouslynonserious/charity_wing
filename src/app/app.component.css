@@ -153,7 +153,24 @@
 
 
 
-/*** Header ***/
+/*** Header ***//* Ensure equal height for carousel images */
+#header-carousel .carousel-item {
+    height: 600px; /* Set a fixed height for all carousel items */
+}
+
+#header-carousel .carousel-item img {
+    width: 100%; /* Ensure images cover the full width */
+    height: 100%; /* Ensure images cover the full height */
+    object-fit: cover; /* Maintain aspect ratio while filling the container */
+}
+
+/* Optional: Adjust carousel item height for smaller screens */
+@media (max-width: 768px) {
+    #header-carousel .carousel-item {
+        height: 300px; /* Adjust height for smaller screens */
+    }
+}
+
 .carousel-caption {
     top: 0;
     left: 0;
@@ -187,7 +204,7 @@
         position: relative;
         min-height: 450px;
     }
-    
+
     #header-carousel .carousel-item img {
         position: absolute;
         width: 100%;
@@ -195,6 +212,7 @@
         object-fit: cover;
     }
 }
+
 
 .page-header {
     padding-top: 12rem;
@@ -256,6 +274,7 @@
     height: 100%;
     opacity: 1;
 }
+
 
 
 /*** Service ***/

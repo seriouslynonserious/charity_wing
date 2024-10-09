@@ -131,24 +131,26 @@
   
   <!-- Modal -->
   <!-- Initial Popup Modal (contains button) -->
-<div class="modal fade" id="initialModal" tabindex="-1" aria-labelledby="initialModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+  <div class="modal fade animate__animated animate__fadeIn" id="initialModal" tabindex="-1" aria-labelledby="initialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered animate__animated animate__zoomIn">
       <div class="modal-content">
-        <div class="modal-header">
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="initialModalLabel">Welcome to Gift of Giving</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body text-center">
-          <p>Make your birthday extra special by donating to our cause.</p>
-          <!-- Button to open the donation form -->
-          <button type="button" class="btn btn-primary" (click)="openDonationForm()">
-            Open Donation Form
-          </button>
-          <p>you can check the list </p>
-          <div class="text-center mb-4">
-            <button type="button" class="btn btn-primary" (click)="openDonorList()">
-              View Recent Birthday Donors
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="text-center">
+            <!-- Intro Message -->
+            <p class="lead mb-4 animate__animated animate__fadeInUp">Please donate blood, it will save lives.</p>
+            
+            <!-- Open Donation Form Button -->
+            <button type="button" class="btn btn-success btn-lg mb-3 animate__animated animate__fadeInUp" (click)="openDonationForm()">
+              <i class="fa fa-heart me-2"></i> Open Donation Form
             </button>
+  
+            
           </div>
         </div>
       </div>
@@ -173,10 +175,7 @@
               <label for="amount">Amount:</label>
               <input type="number" id="amount" class="form-control" [(ngModel)]="amount" name="amount" required>
             </div>
-            <div class="form-group">
-              <label for="panCard">PAN Card:</label>
-              <input type="text" id="panCard" class="form-control" [(ngModel)]="panCard" name="panCard" required>
-            </div>
+            
             <div class="form-group">
               <label for="donationDate">Donation Date:</label>
               <input type="date" id="donationDate" class="form-control" [(ngModel)]="donationDate" name="donationDate" required>
@@ -209,71 +208,12 @@
 
 
 <!-- Button to Open Donor List Modal -->
-<div class="text-center mb-4">
-    <button type="button" class="btn btn-primary" (click)="openDonorList()">
-      View Recent Birthday Donors
-    </button>
-  </div>
+
   
 
 <!-- Donor List Modal -->
 
 
-<div class="modal fade" id="donorListModal" tabindex="-1" aria-labelledby="donorListModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="donorListModalLabel">Recent Birthday Donors</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Search feature -->
-          <div class="mb-4">
-            <div class="input-group">
-              <input 
-                type="text" 
-                class="form-control" 
-                placeholder="Search Donors..." 
-                [(ngModel)]="searchQuery"
-                (input)="filterDonations()"
-              >
-              <button class="btn btn-primary" (click)="filterDonations()">Search</button>
-            </div>
-          </div>
-          
-          <!-- Responsive table for donor information -->
-          <section class="container py-4">
-            <h3 class="text-center mb-4">Recent Birthday Donors</h3>
-            <div class="table-responsive">
-              <table class="table table-hover table-bordered table-striped animate__animated animate__fadeInUp">
-                <thead class="table-dark">
-                  <tr>
-                    <th>Donor Name</th>
-                    <th>Amount</th>
-                    <th>Donation Date</th>
-                    <th>PAN Card</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let donation of filteredDonations$ | async">
-                    <td>{{ donation.donorName }}</td>
-                    <td>₹{{ donation.amount }}</td>
-                    <td>{{ donation.donationDate }}</td>
-                    <td>{{ donation.panCard }}</td>
-                    <td>{{ donation.email }}</td>
-                    <td>{{ donation.message }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-  
   
   
   

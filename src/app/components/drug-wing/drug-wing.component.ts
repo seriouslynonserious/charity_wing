@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrugWingService } from '../../services/drug-wing.service';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-drug-wing',
   templateUrl: './drug-wing.component.html',
@@ -15,8 +15,7 @@ export class DrugWingComponent implements OnInit {
   age: number = 0;
   gender: string = '';
   address: string = '';
-  medicineNeeded: string = '';
-  reportUrl: string = ''; // Holds the base64 URL of the uploaded report
+ 
 
   // Observable to hold patients list
   patients$: Observable<any> | undefined;
@@ -26,18 +25,17 @@ export class DrugWingComponent implements OnInit {
   ngOnInit(): void {
     // Fetch existing patients on component initialization
     this.patients$ = this.drugWingService.getPatients();
+    const initialModal = new bootstrap.Modal(document.getElementById('initialModal'), {});
+    initialModal.show();
   }
 
-  // Function to handle file selection and convert it to base64 URL
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e: any) => {
-      this.reportUrl = e.target.result; // Store the base64 URL of the file
-    };
-
-    reader.readAsDataURL(file); // Convert file to Data URL
+  
+ 
+  openDonorList(): void {
+    const initialModal = bootstrap.Modal.getInstance(document.getElementById('initialModal'));
+    const donorListModal = new bootstrap.Modal(document.getElementById('donorListModal'), {});
+   initialModal.hide();
+    donorListModal.show();
   }
 
   // Function to add a new patient
@@ -50,17 +48,20 @@ export class DrugWingComponent implements OnInit {
         age: this.age,
         gender: this.gender,
         address: this.address,
-        medicineNeeded: this.medicineNeeded,
-        reportUrl: this.reportUrl // Attach the base64 URL of the uploaded report
+       
       };
 
       this.drugWingService.addPatient(newPatient); // Call service to add the new patient
 
       // Reset the form after adding a patient
       patientForm.resetForm();
-
-      // Reset the reportUrl
-      this.reportUrl = '';
+      this.closeModal();
+      
+      
     }
+  }
+  closeModal() {
+    const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+    donationModal.hide();
   }
 }

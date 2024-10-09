@@ -11,7 +11,7 @@ interface Donation {
   amount: number;
   email: string;
   message?: string;
-  panCard: string;
+  
   donationDate: string;
 }
 
@@ -30,7 +30,7 @@ export class GiftOfGivingComponent implements OnInit {
   amount: number | null = null;
   email: string = '';
   message: string = '';
-  panCard: string = '';
+ 
   donationDate: string = '';
 
   // Search query
@@ -75,13 +75,13 @@ export class GiftOfGivingComponent implements OnInit {
 
   // Method to make a birthday donation
   makeBirthdayDonation(): void {
-    if (this.donorName && this.amount && this.email && this.panCard && this.donationDate) {
+    if (this.donorName && this.amount && this.email  && this.donationDate) {
       const newDonation: Donation = {
         donorName: this.donorName,
         amount: this.amount!,
         email: this.email,
         message: this.message,
-        panCard: this.panCard,
+      
         donationDate: this.donationDate
       };
 
@@ -96,7 +96,7 @@ export class GiftOfGivingComponent implements OnInit {
       this.amount = null;
       this.email = '';
       this.message = '';
-      this.panCard = '';
+     
       this.donationDate = '';
 
       // Close the modal after the donation is added

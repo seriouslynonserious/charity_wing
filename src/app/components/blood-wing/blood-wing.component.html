@@ -1,7 +1,6 @@
 <!-- src/app/components/blood-wing/blood-wing.component.html -->
-<!-- src/app/components/blood-wing/blood-wing.component.html -->
 <div class="blood-wing-component">
-
+<!--about us -->
 <div class="container-xxl py-5 ">
   <div class="container ">
     <div class="row g-5">
@@ -44,7 +43,7 @@
   </div>
 </div>
 
-<!--about us end -->
+
 <!--causes-->
 <div class="container-xxl bg-light my-5 py-5">
   <div class="container py-5">
@@ -135,31 +134,42 @@
 
 
 
-
-
-<div class="modal fade" id="initialModal" tabindex="-1" aria-labelledby="initialModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade animate__animated animate__fadeIn" id="initialModal" tabindex="-1" aria-labelledby="initialModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered animate__animated animate__zoomIn">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- Modal Header -->
+      <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="initialModalLabel">Welcome to Gift of Giving</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center">
-        <p>please donate blodd it will save life </p>
-        <!-- Button to open the donation form -->
-        <button type="button" class="btn btn-primary" (click)="openDonationForm()">
-          Open Donation Form
-        </button>
-        <p>you can check the list </p>
-        <div class="text-center mb-4">
-          <button type="button" class="btn btn-primary" (click)="openDonorList()">
-            View blood donor list
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="text-center">
+          <!-- Intro Message -->
+          <p class="lead mb-4 animate__animated animate__fadeInUp">Please donate blood, it will save lives.</p>
+          
+          <!-- Open Donation Form Button -->
+          <button type="button" class="btn btn-success btn-lg mb-3 animate__animated animate__fadeInUp" (click)="openDonationForm()">
+            <i class="fa fa-heart me-2"></i> Open Donation Form
+          </button>
+
+          <!-- Divider -->
+          <hr class="my-4 animate_animated animate_fadeInUp">
+
+          <!-- Donor List Message -->
+          <p class="mb-4 animate_animated animate_fadeInUp">You can also check the list of blood donors.</p>
+          
+          <!-- View Donor List Button -->
+          <button type="button" class="btn btn-primary btn-lg animate_animated animate_fadeInUp" (click)="openDonorList()">
+            <i class="fa fa-list me-2"></i> View Blood Donor List
           </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
@@ -224,15 +234,7 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="previousDiseases">Previous Critical Diseases:</label>
-            <textarea id="previousDiseases" [(ngModel)]="previousDiseases" name="previousDiseases" minlength="5"
-              #previousDiseasesInput="ngModel" class="form-control"></textarea>
-            <div *ngIf="previousDiseasesInput.invalid && previousDiseasesInput.touched" class="text-danger">
-              <small *ngIf="previousDiseasesInput.errors?.['minlength']">Please provide more details (at least 5
-                characters).</small>
-            </div>
-          </div>
+          
 
 
           <button type="submit" class="btn btn-primary btn-block" [disabled]="!donationForm.form.valid">
@@ -246,10 +248,7 @@
 </div>
 
 
-
-
 <!-- donor-list -->
-
 
 <div class="modal fade" id="donorListModal" tabindex="-1" aria-labelledby="donorListModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -275,8 +274,7 @@
                   <th>Age</th>
                   <th>Blood Group</th>
                   <th>Contact</th>
-                  <th>Address</th>
-                  <th>Previous Critical Diseases</th>
+                  <th>Donation Date</th> <!-- New column for the donation date -->
                 </tr>
               </thead>
               <tbody>
@@ -285,10 +283,10 @@
                   <td>{{ donor.age }}</td>
                   <td>{{ donor.bloodGroup }}</td>
                   <td>{{ donor.contact }}</td>
-                  <td>{{ donor.address }}</td>
-                  <td>{{ donor.previousDiseases }}</td>
+                  <td>{{ donor.donationDate }}</td> <!-- Display the donation date -->
                 </tr>
               </tbody>
+              
             </table>
           </div>
         </section>
@@ -296,6 +294,80 @@
     </div>
   </div>
 </div>
+
+
+<!--WHY -->
+<div class="container-xxl py-5">
+  <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+          <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Do</div>
+          <h1 class="display-6 mb-5">Learn More About Our Blood Donation Efforts and How You Can Help</h1>
+      </div>
+      <div class="row g-4 justify-content-center">
+          <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
+                  <div class="image-container">
+                      <img class="img-fluid" src="assets/img/blood-1.png" alt="" style="width: 100%; height: 280px; object-fit: cover;">
+                  </div>
+                  <h4 class="mb-3">Saving Lives</h4>
+                  <p class="mb-4">Every donation can save up to three lives. Blood donors are essential to ensuring that hospitals have enough blood for patients in need.</p>
+                  <a class="btn btn-outline-primary px-3" href="https://www.chaudharyhospital.in/why-blood-donation-matters-save-life-and-improve-health/#:~:text=In%20some%20emergencies%20like%20natural,makes%20them%20an%20aware%20individual." target="_blank">
+                      Learn More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
+                  <div class="image-container">
+                      <img class="img-fluid" src="assets/img/blood-2.png" alt="" style="width: 100%; height: 280px; object-fit: cover;">
+                  </div>
+                  <h4 class="mb-3">Community Support</h4>
+                  <p class="mb-4">By donating blood, you’re contributing to your community’s health and welfare, supporting those who may be experiencing medical emergencies.</p>
+                  <a class="btn btn-outline-primary px-3" href="https://www.aspenhospital.org/healthy-journey/the-community-benefits-of-donating-blood/" target="_blank">
+                      Learn More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
+                  <div class="image-container">
+                      <img class="img-fluid" src="assets/img/blood-3.jpg" alt="" style="width: 100%; height: 280px; object-fit: cover;">
+                  </div>
+                  <h4 class="mb-3">Be a Hero</h4>
+                  <p class="mb-4">Donating blood is a selfless act that makes you a hero to someone in need. Your blood could be the difference between life and death.</p>
+                  <a class="btn btn-outline-primary px-3" href="https://www.who.int/westernpacific/news/item/13-06-2012-every-blood-donor-is-a-hero" target="_blank">
+                      Learn More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+              <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
+                  <div class="image-container">
+                      <img class="img-fluid" src="assets/img/blood-4.png" alt="" style="width: 100%; height: 280px; object-fit: cover;">
+                  </div>
+                  <h4 class="mb-3">Health Benefits</h4>
+                  <p class="mb-4">Regular blood donation can be beneficial for your own health, including reducing the risk of certain diseases and helping with cardiovascular health.</p>
+                  <a class="btn btn-outline-primary px-3" href="https://www.healthline.com/health/benefits-of-donating-blood" target="_blank">
+                      Learn More
+                      <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                          <i class="fa fa-arrow-right"></i>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 
 
 <!-- team list -->

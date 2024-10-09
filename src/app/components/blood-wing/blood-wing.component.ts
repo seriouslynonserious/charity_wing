@@ -11,7 +11,7 @@ interface BloodDonor {
   bloodGroup: string;
   contact: string;
   address: string;
-  previousDiseases: string;
+  donationDate: string; 
 }
 
 @Component({
@@ -31,7 +31,7 @@ export class BloodWingComponent implements OnInit {
   bloodGroup: string = '';
   contact: string = '';
   address: string = '';
-  previousDiseases: string = '';
+  
 
   constructor(private bloodDonorService: BloodDonorService) {
     // Load all donors
@@ -66,35 +66,41 @@ export class BloodWingComponent implements OnInit {
   }
 
   openDonorList(): void {
+    const initialModal = bootstrap.Modal.getInstance(document.getElementById('initialModal'));
     const donorListModal = new bootstrap.Modal(document.getElementById('donorListModal'), {});
+
+    initialModal.hide();
     donorListModal.show();
   }
 
   addDonor(): void {
     if (this.name && this.age && this.bloodGroup && this.contact && this.address) {
+      const currentDate = new Date().toLocaleDateString(); // Get current date in a readable format
+  
       const newDonor: BloodDonor = {
         name: this.name,
         age: this.age,
         bloodGroup: this.bloodGroup,
         contact: this.contact,
         address: this.address,
-        previousDiseases: this.previousDiseases
+        donationDate: currentDate // Add current date
       };
+  
       this.bloodDonorService.addDonor(newDonor);
-
+  
       // Reset form fields
       this.name = '';
       this.age = 0;
       this.bloodGroup = '';
       this.contact = '';
       this.address = '';
-      this.previousDiseases = '';
-
+  
       this.closeModal();
     } else {
       alert('Please fill in all required fields.');
     }
   }
+  
 
   closeModal() {
     const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
