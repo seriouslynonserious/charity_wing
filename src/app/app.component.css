@@ -26,45 +26,9 @@
 
 
 /*** Button ***/
-.btn {
-    font-weight: 500;
-    transition: .5s;
-}
 
-.btn.btn-primary,
-.btn.btn-outline-primary:hover {
-    color: #FFFFFF;
-}
 
-.btn.btn-primary:hover {
-   
-    background: transparent;
-}
 
-.btn-square {
-    width: 38px;
-    height: 38px;
-}
-
-.btn-sm-square {
-    width: 32px;
-    height: 32px;
-}
-
-.btn-lg-square {
-    width: 48px;
-    height: 48px;
-}
-
-.btn-square,
-.btn-sm-square,
-.btn-lg-square {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-}
 
 
 /*** Navbar ***/

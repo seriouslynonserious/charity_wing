@@ -1,13 +1,13 @@
-// src/app/components/admin/admin.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BloodDonorService } from '../../services/blood-donor.service';
 import { DrugWingService } from '../../services/drug-wing.service';
 import { DonationService } from '../../services/donation.service';
 import { HairDonationService } from '../../services/hair-donation.service';
-import { map, switchMap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var bootstrap: any;
+
 interface Patient {
   name: string;
   condition: string;
@@ -15,8 +15,6 @@ interface Patient {
   age: number;
   gender: string;
   address: string;
-
-
 }
 
 interface BloodDonor {
@@ -33,7 +31,6 @@ interface Donation {
   amount: number;
   email: string;
   message?: string;
-
   donationDate: string;
 }
 
@@ -57,24 +54,28 @@ export class AdminComponent implements OnInit {
   showPatientList = false;
   showDonationList = false;
   showHairDonorList = false;
+  showNewsAndUpdate = false; // New flag for News and Update section
+
   donors$: Observable<BloodDonor[]>;
   patients$: Observable<Patient[]>;
   donations$: Observable<Donation[]>;
   hairDonors$: Observable<HairDonor[]>;
+
   // BLOOD-WING.COMPOENTN
   name: string = '';
   age: number = 0;
   bloodGroup: string = '';
   contact: string = '';
   address: string = '';
-  //GIFT-OF-GIVING.COMPOENTN
+
+  // GIFT-OF-GIVING.COMPOENTN
   donorName: string = '';
   amount: number | null = null;
   email: string = '';
   message: string = '';
   donationDate: string = '';
 
-  //hair-donor.compoent
+  // hair-donor.component
   donor: HairDonor = {
     name: '',
     contact: '',
@@ -85,32 +86,56 @@ export class AdminComponent implements OnInit {
     donationDate: ''
   };
 
-  //drug-wing
+  // drug-wing
   condition: string = '';
   gender: string = '';
+
+  // For Image Upload
+  selectedFile: string[] = [];
+  images: string[] = []; 
+  currentImage: string | null = null;
 
   constructor(
     private bloodDonorService: BloodDonorService,
     private drugWingService: DrugWingService,
     private donationService: DonationService,
-    private hairDonationService: HairDonationService
+    private hairDonationService: HairDonationService,
+    private router: Router
   ) {
     this.donors$ = this.bloodDonorService.getDonors();
     this.patients$ = this.drugWingService.getPatients();
     this.donations$ = this.donationService.getDonations();
     this.hairDonors$ = this.hairDonationService.getHairDonors();
-
   }
+  isLoggedIn = false;
+
 
   ngOnInit(): void {
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const storedImages = localStorage.getItem('uploadedImages');
+    if (storedImages) {
+      this.images = JSON.parse(storedImages);
+    }
 
   }
 
+
+  logout(): void {
+    // Clear login data
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email'); // or any other session information
+
+    // Redirect to the home page
+    this.router.navigate(['/']);
+  }
+
+  // Toggling between different sections
   toggleDonorList() {
     this.showDonorList = !this.showDonorList;
     this.showPatientList = false;
     this.showDonationList = false;
     this.showHairDonorList = false;
+    this.showNewsAndUpdate = false;
   }
 
   togglePatientList() {
@@ -118,6 +143,7 @@ export class AdminComponent implements OnInit {
     this.showDonorList = false;
     this.showDonationList = false;
     this.showHairDonorList = false;
+    this.showNewsAndUpdate = false;
   }
 
   toggleDonationList() {
@@ -125,6 +151,7 @@ export class AdminComponent implements OnInit {
     this.showDonorList = false;
     this.showPatientList = false;
     this.showHairDonorList = false;
+    this.showNewsAndUpdate = false;
   }
 
   toggleHairDonorList() {
@@ -132,27 +159,19 @@ export class AdminComponent implements OnInit {
     this.showDonorList = false;
     this.showPatientList = false;
     this.showDonationList = false;
+    this.showNewsAndUpdate = false;
   }
 
-  deleteDonor(donorName: string): void {
-    this.bloodDonorService.deleteDonor(donorName);
-  }
-  deleteHairDonor(name: string) {
-    this.hairDonationService.deleteHairDonor(name);
-  }
-  deletePatient(name: string): void {
-    this.drugWingService.deletePatient(name);
-  }
-  deleteDonation(donorName: string): void {
-    this.donationService.deleteDonation(donorName);
+  // Toggle News and Update section
+  toggleNewsAndUpdate() {
+    this.showNewsAndUpdate = !this.showNewsAndUpdate;
+    this.showDonorList = false;
+    this.showPatientList = false;
+    this.showDonationList = false;
+    this.showHairDonorList = false;
   }
 
-
-  //BLOOD-WING
-  openDonationForm(): void {
-    const donationModal = new bootstrap.Modal(document.getElementById('donationModal'), {})
-    donationModal.show();
-  }
+  // Blood Wing Functions
   addDonor(): void {
     if (this.name && this.age && this.bloodGroup && this.contact && this.address) {
       const currentDate = new Date().toLocaleDateString(); // Get current date in a readable format
@@ -180,17 +199,13 @@ export class AdminComponent implements OnInit {
       alert('Please fill in all required fields.');
     }
   }
+
   closeModal() {
     const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
     donationModal.hide();
   }
 
-
-  //GIFT-OF-GIVING
-  openDonationForms(): void {
-    const donationModals = new bootstrap.Modal(document.getElementById('donationModals'), {})
-    donationModals.show();
-  }
+  // Gift of Giving Functions
   makeBirthdayDonation(): void {
     if (this.donorName && this.amount && this.email && this.donationDate) {
       const newDonation: Donation = {
@@ -198,25 +213,19 @@ export class AdminComponent implements OnInit {
         amount: this.amount!,
         email: this.email,
         message: this.message,
-
         donationDate: this.donationDate
       };
 
-      // Add the new donation to the service
       this.donationService.addDonation(newDonation);
-
-      // Fetch the updated list of donations after adding the new one
       this.donations$ = this.donationService.getDonations();
 
-      // Reset form fields after successful submission
+      // Reset form fields
       this.donorName = '';
       this.amount = null;
       this.email = '';
       this.message = '';
-
       this.donationDate = '';
 
-      // Close the modal after the donation is added
       this.closeModals();
     } else {
       alert('Please fill in all required fields.');
@@ -228,32 +237,16 @@ export class AdminComponent implements OnInit {
     donationModals.hide();
   }
 
-  //hair-to-care
-  openhairDonationForm(): void {
-
-    const donationModalss = new bootstrap.Modal(document.getElementById('hairDonationModal'));
-    donationModalss.show();
-  }
-
+  // Hair Donation Functions
   addDonorhair(): void {
-
     if (this.donor.name && this.donor.contact && this.donor.email && this.donor.age && this.donor.gender && this.donor.hairLength) {
-      // Automatically set the donation date to the current date
       this.donor.donationDate = new Date().toLocaleDateString();
-
-
       this.hairDonationService.addHairDonor(this.donor);
-
-      // Reset form fields
       this.resetFormFields();
       this.closeModalss();
     } else {
       alert('Please fill in all required fields.');
     }
-  }
-  closeModalss() {
-    const donationModalss = bootstrap.Modal.getInstance(document.getElementById('hairDonationModal'));
-    donationModalss.hide();
   }
 
   resetFormFields() {
@@ -264,18 +257,16 @@ export class AdminComponent implements OnInit {
       age: 0,
       gender: '',
       hairLength: 0,
-      donationDate: '' // Reset donation date after submission
+      donationDate: ''
     };
   }
 
-  //drug-wing
-  openPatientForm(): void {
-
-    const donationModal = new bootstrap.Modal(document.getElementById('patientdonationModal'), {});
-
-
-    donationModal.show();
+  closeModalss() {
+    const donationModalss = bootstrap.Modal.getInstance(document.getElementById('hairDonationModal'));
+    donationModalss.hide();
   }
+
+  // Drug Wing Functions
   addPatient(patientForm: NgForm): void {
     if (patientForm.valid) {
       const newPatient = {
@@ -284,21 +275,78 @@ export class AdminComponent implements OnInit {
         contact: this.contact,
         age: this.age,
         gender: this.gender,
-        address: this.address,
-
+        address: this.address
       };
 
-      this.drugWingService.addPatient(newPatient); // Call service to add the new patient
-
-      // Reset the form after adding a patient
+      this.drugWingService.addPatient(newPatient);
       patientForm.resetForm();
-
-
       this.closepatientModal();
     }
   }
+
   closepatientModal() {
     const donationModal = bootstrap.Modal.getInstance(document.getElementById('patientdonationModal'));
     donationModal.hide();
+  }
+
+
+ 
+  // Delete Functions
+  deleteDonor(donorName: string): void {
+    this.bloodDonorService.deleteDonor(donorName);
+    
+
+  }
+
+  deleteHairDonor(name: string) {
+    this.hairDonationService.deleteHairDonor(name);
+  }
+
+  deletePatient(name: string): void {
+    this.drugWingService.deletePatient(name);
+  }
+
+  deleteDonation(donorName: string): void {
+    this.donationService.deleteDonation(donorName);
+  }
+  
+  /*image */  // Image Upload Functions for News and Updates
+  onFilesSelected(event: any): void {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64Image = reader.result as string;
+          this.images.push(base64Image); // Add image to the list
+        };
+        reader.readAsDataURL(files[i]);
+      }
+    }
+  }
+
+  saveImages(): void {
+    if (this.images.length > 0) {
+      localStorage.setItem('uploadedImages', JSON.stringify(this.images));
+      alert('Images saved to local storage successfully!');
+    } else {
+      alert('No images to save.');
+    }
+  }
+
+  deleteImage(index: number): void {
+    this.images.splice(index, 1); // Remove image from the list
+    localStorage.setItem('uploadedImages', JSON.stringify(this.images)); // Update local storage
+  }
+  showImage(image: string): void {
+    this.currentImage = image; // Set the current image
+    const modal = new (window as any).bootstrap.Modal(document.getElementById('imageModal'));
+    modal.show(); // Show the Bootstrap modal
+  }
+  closePreview() {
+    this.currentImage = null;
+    const modalElement = document.getElementById('imageModal')!;
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance?.hide();
   }
 }

@@ -4,32 +4,29 @@
   box-sizing: border-box;
 }
 
-html, body {
+
+
+.containers {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Ensures the container covers full height of the viewport */
+  overflow: hidden;
   height: 100%; /* Ensure body and html cover full height */
   font-family: 'Raleway', sans-serif;
   margin: 0;
   padding: 0;
-  background: url('2.png') no-repeat center center fixed;
-  background-size: cover;
 }
 
-.container {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* 100vh to cover the full height of the viewport */
-  overflow: hidden;
-}
-
-.container:hover .top:before, 
-.container:hover .top:after, 
-.container:hover .bottom:before, 
-.container:hover .bottom:after {
+.containers:hover .top:before, 
+.containers:hover .top:after, 
+.containers:hover .bottom:before, 
+.containers:hover .bottom:after {
   margin-left: 200px;
   transform-origin: -200px 50%;
   transition-delay: 0s;
 }
 
-.container:hover .center {
+.containers:hover .center {
   opacity: 1;
   transition-delay: 0.2s;
 }
@@ -39,7 +36,7 @@ html, body {
   content: '';
   display: block;
   position: absolute;
-  width: 250vmax; /* Increased size to ensure full page coverage */
+  width: 250vmax; /* Ensured large size for full page coverage */
   height: 250vmax;
   top: 50%;
   left: 50%;
@@ -73,8 +70,8 @@ html, body {
 
 .center {
   position: absolute;
-  width: 400px;
-  height: auto;
+  width: 100%;
+  max-width: 400px; /* Limits the width to 400px */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centers the login form */
@@ -87,12 +84,12 @@ html, body {
   transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
   transition-delay: 0s;
   color: #333;
-  background-color: rgba(255, 255, 255, 0.8); /* Adds background color to the login form */
+  background-color: rgba(255, 255, 255, 0.8); /* Adds a semi-transparent background to the form */
   border-radius: 10px;
   z-index: 20;
 }
 
-input {
+.center input {
   width: 100%;
   padding: 15px;
   margin: 5px;
@@ -101,7 +98,7 @@ input {
   font-family: inherit;
 }
 
-button {
+.center button {
   width: 100%;
   padding: 15px;
   margin-top: 10px;
@@ -113,6 +110,49 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.center button:hover {
   background-color: #555;
+}
+#navbar {
+  background-color: #212529; /* Dark background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow to make the navbar stand out */
+}
+
+/* Navbar links - Light text */
+.nav-item.nav-link {
+  color: #f8f9fa; /* Light color for text */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Navbar link hover effect */
+.nav-item.nav-link:hover {
+  color: #007bff; /* Blue color on hover */
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+  border-radius: 4px;
+}
+
+/* Button styling for Login Now */
+.btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Button hover effect */
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Navbar brand */
+#navbar .navbar-brand h1 {
+  color: #f8f9fa; /* White color for brand text */
+  font-weight: 700;
+}
+
+/* Mobile view - Navbar collapses properly */
+@media (max-width: 991px) {
+  #navbar .navbar-nav {
+      margin-top: 10px;
+  }
 }

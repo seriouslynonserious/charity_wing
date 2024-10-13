@@ -1,3 +1,4 @@
+
 .table-container {
   display: flex;
   justify-content: center;
@@ -10,13 +11,51 @@
 h2, h3 {
   color: #333;
 }
-nav ul {
-  padding: 0;
+
+/* Dark background for the navbar */
+#navbar {
+  background-color: #212529; /* Dark background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow to make the navbar stand out */
 }
-nav ul li {
-  display: inline-block;
-  margin: 0 15px;
+
+/* Navbar links - Light text */
+.nav-item.nav-link {
+  color: #f8f9fa; /* Light color for text */
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
-button {
-  margin-bottom: 15px;
+
+/* Navbar link hover effect */
+.nav-item.nav-link:hover {
+  color: #007bff; /* Blue color on hover */
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+  border-radius: 4px;
+}
+
+
+#navbar .navbar-brand h1 {
+  color: #f8f9fa; /* White color for brand text */
+  font-weight: 700;
+}
+
+/* Mobile view - Navbar collapses properly */
+@media (max-width: 991px) {
+  #navbar .navbar-nav {
+      margin-top: 10px;
+  }
+}
+.preview-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.preview-container img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.preview-container button {
+  height: 40px;
 }

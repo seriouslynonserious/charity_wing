@@ -125,51 +125,7 @@
 }
 
 /* Button Styles */
-.btn-group .btn-light:hover,
-.btn-group input[type="radio"]:checked+label {
-    color: var(--primary);
-    border-color: var(--primary);
-}
 
-.btn {
-    font-weight: 500;
-    transition: color .5s ease, background .5s ease;
-}
-
-.btn.btn-primary,
-.btn.btn-outline-primary:hover {
-    color: #FFFFFF;
-}
-
-.btn.btn-primary:hover {
-    color: var(--primary);
-    background: transparent;
-}
-
-.btn-square {
-    width: 38px;
-    height: 38px;
-}
-
-.btn-sm-square {
-    width: 32px;
-    height: 32px;
-}
-
-.btn-lg-square {
-    width: 48px;
-    height: 48px;
-}
-
-.btn-square,
-.btn-sm-square,
-.btn-lg-square {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -231,3 +187,313 @@
         height: 40px;
     }
 }
+.modal.fade.show.d-block {
+    display: block !important;
+    background-color: rgba(0, 0, 0, 0.5); /* Modal background color */
+    animation: fadeIn 0.5s ease-out; /* Fade-in animation */
+  }
+  
+  .animated-modal {
+    animation: slideDown 0.5s ease-out; /* Slide-down animation */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .modal-header,
+  .modal-footer {
+    background-color: #f7f7f7;
+    border-bottom: none;
+    border-top: none;
+  }
+  
+  .modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+ 
+  
+  /********** Template CSS **********/
+
+
+
+
+/*** Spinner ***/
+
+
+
+/*** Button ***/
+
+
+
+
+
+/*** Navbar ***/
+/*** Navbar ***/
+.fixed-top {
+    transition: background-color 0.5s ease, top 0.5s ease;
+}
+
+/* Navbar when scrolling */
+.navbar-scroll {
+    background-color: #0f0e0e !important; /* Dark background */
+    box-shadow: 0px 4px 12px rgba(11, 11, 11, 0.1);
+}
+
+/* Top bar styles */
+.top-bar {
+    height: 45px;
+    background-color: #333; /* Consistent dark grey */
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: top 0.5s ease;
+}
+
+/* Navbar links */
+.navbar .navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: #fff !important; /* White links */
+    font-weight: 500;
+    outline: none;
+    transition: color 0.3s ease;
+}
+
+/* Navbar links hover & active state */
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: #cfcfcf !important; /* Light grey on hover/active */
+}
+
+/* Dropdown toggle arrow */
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 8px;
+    color: #fff;
+}
+
+/* Mobile navbar styles */
+@media (max-width: 991.98px) {
+    .navbar .navbar-nav {
+        margin-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(15, 14, 14, 0.8) !important; /* Slightly transparent dark background */
+        z-index: 1;
+    }
+
+    .navbar .navbar-nav .nav-link {
+        padding: 10px 0;
+        color: #fff !important; /* White links */
+    }
+}
+
+/* Dropdown hover and animations for large screens */
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        transition: transform 0.5s, opacity 0.5s;
+        opacity: 0;
+        background-color: #0f0e0e; /* Dropdown menu background matches navbar */
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        transform: rotateX(0deg);
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+
+
+/*** Header ***//* Ensure equal height for carousel images */
+#header-carousel .carousel-item {
+    height: 600px; /* Set a fixed height for all carousel items */
+}
+
+#header-carousel .carousel-item img {
+    width: 100%; /* Ensure images cover the full width */
+    height: 100%; /* Ensure images cover the full height */
+    object-fit: cover; /* Maintain aspect ratio while filling the container */
+}
+
+/* Optional: Adjust carousel item height for smaller screens */
+@media (max-width: 768px) {
+    #header-carousel .carousel-item {
+        height: 300px; /* Adjust height for smaller screens */
+    }
+}
+
+.carousel-caption {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 29, 35, .8);
+    z-index: 1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 15%;
+    z-index: 1000;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--dark);
+    border: 12px solid var(--dark);
+    border-radius: 3rem;
+}
+
+@media (max-width: 768px) {
+    #header-carousel .carousel-item {
+        position: relative;
+        min-height: 450px;
+    }
+
+    #header-carousel .carousel-item img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+
+.page-header {
+    padding-top: 12rem;
+    padding-bottom: 6rem;
+    background: linear-gradient(rgba(0, 29, 35, .8), rgba(0, 29, 35, .8)), url(/apps/src/assets/img/) center center no-repeat;
+    background-size: cover;
+}
+
+.page-header .breadcrumb-item+.breadcrumb-item::before {
+    color: #999999;
+}
+
+
+/*** Causes ***/
+
+
+
+/*** Service ***/
+.service-item {
+    box-shadow: 0 0 45px rgba(0, 0, 0, .06);
+}
+
+
+/*** Donate ***/
+.donate {
+    background: rgba(42, 45, 46, 0.8);
+    opacity: 2;
+}
+
+
+
+
+
+
+
+/*** Testimonial ***/
+
+
+/*** Footer ***/
+
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff; /* Bootstrap primary blue */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: background-color 0.3s, opacity 0.3s;
+  }
+  
+  .carousel-prev {
+    left: 1rem; /* Position to the left */
+  }
+  
+  .carousel-next {
+    right: 1rem; /* Position to the right */
+  }
+  
+  /* Change color on hover */
+  .carousel-prev:hover, .carousel-next:hover {
+    background-color: #28a745; /* Green */
+    opacity: 1;
+  }
+  
+  /* Custom icon styles */
+  .carousel-prev-icon::before, .carousel-next-icon::before {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  /* Left arrow icon */
+  .carousel-prev-icon::before {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M11.354 1.354a.5.5 0 0 1 0 .707L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>');
+  }
+  
+  /* Right arrow icon */
+  .carousel-next-icon::before {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M4.646 1.354a.5.5 0 0 1 0 .707L10.293 8l-5.647 5.646a.5.5 0 0 1-.708.708l6-6a.5.5 0 0 1 0-.708l-6-6a.5.5 0 0 1 .708 0z"/></svg>');
+  }
+  
+  
+  
+
+
+
+
+
+  

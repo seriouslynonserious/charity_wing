@@ -16,6 +16,7 @@ export class LoginComponent {
     if (this.email === 'admin' && this.password === 'admin') {
       localStorage.setItem('userPassword', this.password);
       this.router.navigate(['/admin']);
+      localStorage.setItem('isLoggedIn', 'true');
     } else {
       alert('Invalid credentials. Please enter "admin" as both username and password.');
     }
