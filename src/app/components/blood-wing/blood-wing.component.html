@@ -1,5 +1,5 @@
 <!-- src/app/components/blood-wing/blood-wing.component.html -->
-<div class="blood-wing-component">
+
   <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
     <!-- Top Bar -->
     <div id="top-bar" class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
@@ -105,15 +105,14 @@
   
   <!--about us -->
   <div class="container-xxl py-5 ">
-    <div class="container ">
+    <div class="glass-container ">
       <div class="row g-5">
         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
           <div class="position-relative overflow-hidden h-100" style="min-height: 400px;">
             <img class="position-absolute w-100 h-100 pt-5 pe-5"
               src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
               alt="" style="object-fit: cover;">
-            <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2"
-              src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
+            <img class="position-absolute top-0 end-0 bg-white ps-2 pb-2" src="assets/img/logo.png"
               alt="" style="width: 200px; height: 200px;">
           </div>
         </div>
@@ -126,13 +125,13 @@
               <span class="text-danger">The Blood Wing Team</span>
             </div>
             <p class="mb-5">Our Blood Wing is committed to collecting and distributing life-saving blood for individuals in critical need. Every blood donation has the power to save up to three lives. We collaborate with hospitals, healthcare facilities, and emergency services to ensure that no patient is deprived of the care they deserve. Our mission is to bring hope and health to people through compassionate and selfless blood donations.</p>
-            <a class="btn btn-primary py-2 px-3 me-3" href="">
+            <a class="btn btn-danger py-2 px-3 me-3" href="">
               Learn More
               <div class="d-inline-flex btn-sm-square   text-white rounded-circle ms-2">
                 <i class="fa fa-arrow-right"></i>
               </div>
             </a>
-            <a class="btn btn-primary py-2 px-3" href="">
+            <a class="btn btn-danger py-2 px-3" href="">
               Contact Us
               <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
                 <i class="fa fa-arrow-right"></i>
@@ -148,7 +147,7 @@
 
   <!--causes-->
   <div class="container-xxl bg-light my-5 py-5">
-    <div class="container py-5">
+    <div class="glass-container py-5">
       <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
         <div class="d-inline-block rounded-pill bg-danger text-white py-1 px-3 mb-3">Feature Causes</div>
         <h1 class="display-6 mb-5">"Donate Blood and Save Lives."</h1>
@@ -247,7 +246,7 @@
     <div class="modal-dialog modal-dialog-centered animate__animated animate__zoomIn">
       <div class="modal-content">
         <!-- Modal Header -->
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header bg-danger text-white">
           <h5 class="modal-title" id="initialModalLabel">Welcome to blood-wing</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -270,7 +269,7 @@
             <p class="mb-4 animate_animated animate_fadeInUp">You can also check the list of blood donors.</p>
 
             <!-- View Donor List Button -->
-            <button type="button" class="btn btn-primary btn-lg animate_animated animate_fadeInUp"
+            <button type="button" class="btn btn-danger btn-lg animate_animated animate_fadeInUp"
               (click)="openDonorList()">
               <i class="fa fa-list me-2"></i> View Blood Donor List
             </button>
@@ -362,7 +361,7 @@
   <!-- donor-list -->
 
   <div class="modal fade" id="donorListModal" tabindex="-1" aria-labelledby="donorListModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="donorListModalLabel">Recent donor list</h5>
@@ -410,167 +409,177 @@
 
   <!--WHY -->
   <div class="container-xxl py-5">
-    <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
-        <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Do</div>
-        <h1 class="display-6 mb-5">Learn More About Our Blood Donation Efforts and How You Can Help</h1>
-      </div>
-      <div class="row g-4 justify-content-center">
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-          <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg rounded">
-            <div class="image-container mb-3">
-              <img class="img-fluid rounded" src="assets/img/blood-1.png" alt="Saving Lives" style="width: 100%; height: 280px; object-fit: cover;">
-            </div>
-            <h4 class="mb-3">Saving Lives</h4>
-            <p class="mb-4">Every donation can save up to three lives. Blood donors are essential to ensuring that hospitals have enough blood for patients in need.</p>
-            <a class="btn btn-outline-primary px-3" href="https://www.chaudharyhospital.in/why-blood-donation-matters-save-life-and-improve-health/#:~:text=In%20some%20emergencies%20like%20natural,makes%20them%20an%20aware%20individual." target="_blank">
-              Learn More
-              <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                <i class="fa fa-arrow-right"></i>
-              </div>
-            </a>
-          </div>
+    <div class="glass-container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
+            <div class="d-inline-block rounded-pill bg-black text-danger py-1 px-3 mb-3">What We Do</div>
+            <h1 class="display-6 mb-5">Learn More About Our Blood Donation Efforts and How You Can Help</h1>
         </div>
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-          <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg rounded">
-            <div class="image-container mb-3">
-              <img class="img-fluid rounded" src="assets/img/blood-2.png" alt="Community Support" style="width: 100%; height: 280px; object-fit: cover;">
+
+        <!-- Adjust Row for 2 Cards in a Single Row -->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <!-- Card 1 -->
+            <div class="col wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg">
+                    <div class="image-container mb-3">
+                        <img class="img-fluid rounded" src="assets/img/blood-1.png" alt="Saving Lives">
+                    </div>
+                    <h4 class="mb-3">Saving Lives</h4>
+                    <p class="mb-4">Every donation can save up to three lives. Blood donors are essential to ensuring that hospitals have enough blood for patients in need.</p>
+                    <a class="btn btn-outline-primary px-3" href="https://www.chaudharyhospital.in/why-blood-donation-matters-save-life-and-improve-health" target="_blank">
+                        Learn More
+                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <h4 class="mb-3">Community Support</h4>
-            <p class="mb-4">By donating blood, you’re contributing to your community’s health and welfare, supporting those who may be experiencing medical emergencies.</p>
-            <a class="btn btn-outline-primary px-3" href="https://www.aspenhospital.org/healthy-journey/the-community-benefits-of-donating-blood/" target="_blank">
-              Learn More
-              <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                <i class="fa fa-arrow-right"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-          <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg rounded">
-            <div class="image-container mb-3">
-              <img class="img-fluid rounded" src="assets/img/blood-3.jpg" alt="Be a Hero" style="width: 100%; height: 280px; object-fit: cover;">
+
+            <!-- Card 2 -->
+            <div class="col wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg">
+                    <div class="image-container mb-3">
+                        <img class="img-fluid rounded" src="assets/img/blood-2.png" alt="Community Support">
+                    </div>
+                    <h4 class="mb-3">Community Support</h4>
+                    <p class="mb-4">By donating blood, you’re contributing to your community’s health and welfare, supporting those who may be experiencing medical emergencies.</p>
+                    <a class="btn btn-outline-primary px-3" href="https://www.aspenhospital.org/healthy-journey/the-community-benefits-of-donating-blood/" target="_blank">
+                        Learn More
+                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <h4 class="mb-3">Be a Hero</h4>
-            <p class="mb-4 btn-success">Donating blood is a selfless act that makes you a hero to someone in need. Your blood could be the difference between life and death.</p>
-            <a class="btn btn-outline-primary px-3" href="https://www.who.int/westernpacific/news/item/13-06-2012-every-blood-donor-is-a-hero" target="_blank">
-              Learn More
-              <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                <i class="fa fa-arrow-right"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-          <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg rounded">
-            <div class="image-container mb-3">
-              <img class="img-fluid rounded" src="assets/img/blood-4.png" alt="Health Benefits" style="width: 100%; height: 280px; object-fit: cover;">
+
+            <!-- Card 3 -->
+            <div class="col wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg">
+                    <div class="image-container mb-3">
+                        <img class="img-fluid rounded" src="assets/img/blood-3.png" alt="Be a Hero">
+                    </div>
+                    <h4 class="mb-3">Be a Hero</h4>
+                    <p class="mb-4">Donating blood is a selfless act that makes you a hero to someone in need. Your blood could be the difference between life and death.</p>
+                    <a class="btn btn-outline-primary px-3" href="https://www.who.int/westernpacific/news/item/13-06-2012-every-blood-donor-is-a-hero" target="_blank">
+                        Learn More
+                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <h4 class="mb-3">Health Benefits</h4>
-            <p class="mb-4">Regular blood donation can be beneficial for your own health, including reducing the risk of certain diseases and helping with cardiovascular health.</p>
-            <a class="btn btn-outline-primary px-3" href="https://www.healthline.com/health/benefits-of-donating-blood" target="_blank">
-              Learn More
-              <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
-                <i class="fa fa-arrow-right"></i>
-              </div>
-            </a>
-          </div>
+
+            <!-- Card 4 -->
+            <div class="col wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item bg-white text-center h-100 p-4 p-xl-5 shadow-lg">
+                    <div class="image-container mb-3">
+                        <img class="img-fluid rounded" src="assets/img/blood-4.png" alt="Health Benefits">
+                    </div>
+                    <h4 class="mb-3">Health Benefits</h4>
+                    <p class="mb-4">Regular blood donation can be beneficial for your own health, including reducing the risk of certain diseases and helping with cardiovascular health.</p>
+                    <a class="btn btn-outline-primary px-3" href="https://www.healthline.com/health/benefits-of-donating-blood" target="_blank">
+                        Learn More
+                        <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
   
 
 
 
   <!-- team list -->
   <div class="container-xxl py-5">
-    <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-        <div class="d-inline-block rounded-pill bg-danger text-white py-1 px-3 mb-3">Team Members</div>
-        <h6 class="display-6 mb-5">Let's Meet With Our Ordinary Soldiers</h6>
-      </div>
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-          <div class="team-item position-relative rounded overflow-hidden">
-            <div class="overflow-hidden">
-              <img class="img-fluid"
-                src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
-                alt="">
-            </div>
-            <div class="team-text bg-light text-center p-4">
-              <h5>Full Name</h5>
-              <p class="text-primary">Designation</p>
-              <div class="team-social text-center">
-                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-          </div>
+    <div class="glass-container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="d-inline-block rounded-pill bg-black text-danger py-1 px-3 mb-3">Team Members</div>
+            <h1 class="display-6 mb-5">Let's Meet With Our Ordinary Soldiers</h1>
         </div>
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-          <div class="team-item position-relative rounded overflow-hidden">
-            <div class="overflow-hidden">
-              <img class="img-fluid"
-                src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
-                alt="">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid"
+                            src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
+                            alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="team-text bg-light text-center p-4">
-              <h5>Full Name</h5>
-              <p class="text-primary">Designation</p>
-              <div class="team-social text-center">
-                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-              </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid"
+                            src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
+                            alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid"
+                            src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
+                            alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>Full Name</h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item position-relative rounded overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid"
+                            src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
+                            alt="">
+                    </div>
+                    <div class="team-text bg-light text-center p-4">
+                        <h5>shivam </h5>
+                        <p class="text-primary">Designation</p>
+                        <div class="team-social text-center">
+                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-          <div class="team-item position-relative rounded overflow-hidden">
-            <div class="overflow-hidden">
-              <img class="img-fluid"
-                src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
-                alt="">
-            </div>
-            <div class="team-text bg-light text-center p-4">
-              <h5>Full Name</h5>
-              <p class="text-primary">Designation</p>
-              <div class="team-social text-center">
-                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-          <div class="team-item position-relative rounded overflow-hidden">
-            <div class="overflow-hidden">
-              <img class="img-fluid"
-                src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?w=1060&t=st=1726074859~exp=1726075459~hmac=e32b6d4c60539b1740bdaf39333f99c2e6605b3e088bbe03d392b825c6bbed3c"
-                alt="">
-            </div>
-            <div class="team-text bg-light text-center p-4">
-              <h5>shivam </h5>
-              <p class="text-primary">Designation</p>
-              <div class="team-social text-center">
-                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 
 <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-  <div class="container py-5">
+  <div class=" py-5">
       <div class="row g-5">
           <div class="col-lg-3 col-md-6">
               <h1 class="fw-bold text-primary mb-4"><span class="text-white">Team</span></h1>
@@ -610,5 +619,4 @@
           </div>
       </div>
   </div>
-</div>
 </div>

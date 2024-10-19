@@ -1,0 +1,34 @@
+.equal-size-img {
+    width: 100%; /* Adjust this value as needed */
+    height: 300px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+/* Image Container with Fixed Height and Alignment */
+.img-container {
+    width: 100%;
+    max-width: 150px; /* Adjust based on your needs */
+    height: 150px; /* Fixed height to align images */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the image scales properly */
+}
+
+/* Service Item Styling */
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Button Alignment at the Bottom */
+.service-item .btn {
+    margin-top: auto;
+}

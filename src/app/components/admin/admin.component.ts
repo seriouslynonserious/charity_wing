@@ -116,59 +116,57 @@ export class AdminComponent implements OnInit {
     if (storedImages) {
       this.images = JSON.parse(storedImages);
     }
-
+    this.showDonorList = JSON.parse(localStorage.getItem('showDonorList') || 'false');
+    this.showPatientList = JSON.parse(localStorage.getItem('showPatientList') || 'false');
+    this.showDonationList = JSON.parse(localStorage.getItem('showDonationList') || 'false');
+    this.showHairDonorList = JSON.parse(localStorage.getItem('showHairDonorList') || 'false');
+    this.showNewsAndUpdate = JSON.parse(localStorage.getItem('showNewsAndUpdate') || 'false');
   }
 
 
-  logout(): void {
-    // Clear login data
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('email'); // or any other session information
-
-    // Redirect to the home page
-    this.router.navigate(['/']);
+  
+  saveToggleState(): void {
+    localStorage.setItem('showDonorList', JSON.stringify(this.showDonorList));
+    localStorage.setItem('showPatientList', JSON.stringify(this.showPatientList));
+    localStorage.setItem('showDonationList', JSON.stringify(this.showDonationList));
+    localStorage.setItem('showHairDonorList', JSON.stringify(this.showHairDonorList));
+    localStorage.setItem('showNewsAndUpdate', JSON.stringify(this.showNewsAndUpdate));
   }
-
-  // Toggling between different sections
   toggleDonorList() {
     this.showDonorList = !this.showDonorList;
-    this.showPatientList = false;
-    this.showDonationList = false;
-    this.showHairDonorList = false;
-    this.showNewsAndUpdate = false;
+    this.resetOtherSections('showDonorList');
   }
 
   togglePatientList() {
     this.showPatientList = !this.showPatientList;
-    this.showDonorList = false;
-    this.showDonationList = false;
-    this.showHairDonorList = false;
-    this.showNewsAndUpdate = false;
+    this.resetOtherSections('showPatientList');
   }
 
   toggleDonationList() {
     this.showDonationList = !this.showDonationList;
-    this.showDonorList = false;
-    this.showPatientList = false;
-    this.showHairDonorList = false;
-    this.showNewsAndUpdate = false;
+    this.resetOtherSections('showDonationList');
   }
 
   toggleHairDonorList() {
     this.showHairDonorList = !this.showHairDonorList;
-    this.showDonorList = false;
-    this.showPatientList = false;
-    this.showDonationList = false;
-    this.showNewsAndUpdate = false;
+    this.resetOtherSections('showHairDonorList');
   }
 
-  // Toggle News and Update section
   toggleNewsAndUpdate() {
     this.showNewsAndUpdate = !this.showNewsAndUpdate;
-    this.showDonorList = false;
-    this.showPatientList = false;
-    this.showDonationList = false;
-    this.showHairDonorList = false;
+    this.resetOtherSections('showNewsAndUpdate');
+  }
+
+  // Reset other sections' states and save the current state
+  resetOtherSections(activeSection: string) {
+    this.showDonorList = activeSection === 'showDonorList' ? this.showDonorList : false;
+    this.showPatientList = activeSection === 'showPatientList' ? this.showPatientList : false;
+    this.showDonationList = activeSection === 'showDonationList' ? this.showDonationList : false;
+    this.showHairDonorList = activeSection === 'showHairDonorList' ? this.showHairDonorList : false;
+    this.showNewsAndUpdate = activeSection === 'showNewsAndUpdate' ? this.showNewsAndUpdate : false;
+
+    // Save state to localStorage
+    this.saveToggleState();
   }
 
   // Blood Wing Functions
@@ -349,4 +347,37 @@ export class AdminComponent implements OnInit {
     const modalInstance = bootstrap.Modal.getInstance(modalElement);
     modalInstance?.hide();
   }
+  isSidebarClosed = window.innerWidth < 768;
+  menuItems = [
+    { name: 'Home', icon: 'bx-home-alt', showSubmenu: false },
+    { name: 'Overview', icon: 'bx-grid-alt', showSubmenu: false },
+    // Add more menu items here
+  ];
+
+  toggleSubmenu(index: number) {
+    this.menuItems[index].showSubmenu = !this.menuItems[index].showSubmenu;
+    this.menuItems.forEach((item, i) => {
+      if (i !== index) {
+        item.showSubmenu = false;
+      }
+    });
+  }
+
+  expandSidebar() {
+    this.isSidebarClosed = false;
+  }
+
+  collapseSidebar() {
+    this.isSidebarClosed = true;
+  }
+  
+  logout(): void {
+    // Clear login data
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email'); // or any other session information
+
+    // Redirect to the home page
+    this.router.navigate(['/']);
+  }
+
 }

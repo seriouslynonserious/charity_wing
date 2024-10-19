@@ -30,7 +30,12 @@
     transition: width 5s ease;
     background-color: #e3342f; /* Red theme for progress bar */
 }
-
+.image-container img {
+    width: 100%; 
+    height: 280px;
+    object-fit: cover;
+    
+}
 .causes-item .progress .progress-bar span {
     position: absolute;
     top: -7px;
@@ -195,59 +200,47 @@
 }
 /*END OF WHY WE  CSS*/
 /* Team Section Styling */
-.team-item {
-    position: relative;
-    background-color: #ffffff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-}
-
-.team-item:hover {
-    transform: translateY(-10px);
-}
-
 .team-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
+    position: relative;
+    top: 0;
+    transition: .5s;
 }
 
 .team-item:hover img {
-    transform: scale(1.05);
+    top: -30px;
 }
 
 .team-item .team-text {
-    padding: 20px;
-    text-align: center;
+    position: relative;
+    height: 100px;
+    color: #e25353;
+    transition: .5s;
 }
 
-.team-item .team-text h5 {
-    font-size: 1.25rem;
-    color: #e3342f; /* Red for heading text */
-    margin-bottom: 5px;
+.team-item:hover .team-text {
+    margin-top: -60px;
+    height: 160px;
 }
 
-.team-item .team-text p {
-    font-size: 1rem;
-    color: #6c757d;
+.team-item .team-text .team-social {
+    opacity: 0;
+    transition: .5s;
 }
 
-.team-item .team-social {
-    margin-top: 15px;
+.team-item:hover .team-text .team-social {
+    opacity: 1;
 }
 
-.team-item .team-social a {
-    color: #e3342f; /* Red for social links */
-    font-size: 1.25rem;
-    margin: 0 10px;
-    transition: color 0.3s ease-in-out;
+.team-item .team-social .btn {
+    display: inline-flex;
+    color: #e25353;
+    background: #FFFFFF;
+    border-radius: 40px;
 }
 
-.team-item .team-social a:hover {
-    color: #c21807; /* Darker red on hover */
+.team-item .team-social .btn:hover {
+    color: #FFFFFF;
+    background: #e25353;
 }
 
 /* Media Queries */

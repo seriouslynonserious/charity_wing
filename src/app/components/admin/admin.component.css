@@ -1,48 +1,98 @@
-
-.table-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-.table {
-  width: 80%;
-  margin: auto;
-}
+/* General Heading Styles */
 h2, h3 {
   color: #333;
 }
 
-/* Dark background for the navbar */
+/* Navbar Styles */
 #navbar {
-  background-color: #212529; /* Dark background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow to make the navbar stand out */
+  background-color: #212529;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* Navbar links - Light text */
-.nav-item.nav-link {
-  color: #f8f9fa; /* Light color for text */
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Navbar link hover effect */
-.nav-item.nav-link:hover {
-  color: #007bff; /* Blue color on hover */
-  background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
-  border-radius: 4px;
-}
-
 
 #navbar .navbar-brand h1 {
-  color: #f8f9fa; /* White color for brand text */
+  color: #f8f9fa;
   font-weight: 700;
 }
 
-/* Mobile view - Navbar collapses properly */
-@media (max-width: 991px) {
-  #navbar .navbar-nav {
-      margin-top: 10px;
+.nav-item.nav-link {
+  color: #f8f9fa;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-item.nav-link:hover {
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Sidebar with Glassmorphism */
+.glassmorphism-navbar {
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  backdrop-filter: blur(10px) saturate(180%);
+  background: url('/assets/img/hero-bg.jpg') no-repeat center center / cover;
+  padding: 20px;
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 1.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Sidebar Menu Items */
+.menu_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu_item {
+  margin: 10px 0;
+}
+
+.menu_item .btn-primary {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.menu_item .btn-primary:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Main Content Area */
+.main-content {
+  margin-left: 260px;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .glassmorphism-navbar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .main-content {
+    margin-left: 0;
+    margin-top: 20px; /* Create space between the navbar and table */
+    flex-direction: column;
+    align-items: stretch; /* Ensure full width usage */
   }
 }
+
+/* Image Preview Container */
 .preview-container {
   display: flex;
   align-items: center;
@@ -58,4 +108,124 @@ h2, h3 {
 
 .preview-container button {
   height: 40px;
+}
+
+/* Table Styling with Glassmorphism */
+.table-container {
+  width: 100%;
+  margin-top: 30px;
+  overflow-x: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.table-glassmorphism {
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.table th {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+.table td {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Zebra Stripes for Table Rows */
+.table tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Adjustments for Small Screens */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    width: fit-content;
+    
+  }
+
+  .table {
+    font-size: 14px;
+  }
+
+  .table-glassmorphism {
+    border-radius: 8px;
+  }
+}
+
+/* Horizontal Scrolling for Extra Small Screens */
+@media (max-width: 576px) {
+  .table-container {
+    overflow-x: auto;
+    
+    width: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+}
+
+/* Align Donation Form Button to Center */
+.causes-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -250px;
+}
+
+/* Custom Scrollbar for Table */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* Hero Background Section */
+.hero-background {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: url('/assets/img/hero-bg.jpg') no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Custom Button Style */
+.custom-btn {
+  background-color: rgba(99, 102, 99, 0.33);
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #007bff;
 }

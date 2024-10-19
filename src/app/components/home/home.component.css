@@ -1,10 +1,30 @@
-/* Team Item Styles */
-.team-item img {
-    position: relative;
-    top: 0;
-    transition: top .5s ease;
+/* ==============================
+   Variables
+   ============================== */
+   :root {
+    --primary: #007bff; /* Bootstrap primary color */
+    --secondary: #28a745; /* Bootstrap success color */
+    --background-blur: rgba(30, 122, 129, 0.18); /* Background blur color */
 }
 
+/* ==============================
+   Team Item Styles
+   ============================== */
+.team-item img {
+    width: 100%;
+    height: 300px; /* Adjustable height */
+    object-fit: cover; /* Ensure the image scales without distortion */
+    position: relative;
+    top: 0;
+    transition: top 0.5s ease;
+}
+@media (max-width: 768px) {
+    .team-item img {
+        width: 100%;  /* Ensure image takes full width */
+        height: auto;  /* Maintain aspect ratio */
+        object-fit: cover; /* Ensures the image covers without distortion */
+    }
+}
 .team-item:hover img {
     top: -30px;
 }
@@ -12,7 +32,7 @@
 .team-item .team-text {
     position: relative;
     height: 100px;
-    transition: margin-top .5s ease, height .5s ease;
+    transition: margin-top 0.5s ease, height 0.5s ease;
 }
 
 .team-item:hover .team-text {
@@ -22,7 +42,7 @@
 
 .team-item .team-text .team-social {
     opacity: 0;
-    transition: opacity .5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .team-item:hover .team-text .team-social {
@@ -41,7 +61,9 @@
     background: var(--primary);
 }
 
-/* Causes Item Styles */
+/* ==============================
+   Causes Item Styles
+   ============================== */
 .causes-item .progress {
     height: 5px;
     border-radius: 0;
@@ -79,10 +101,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     opacity: 0;
-    transition: opacity .5s ease, height .5s ease;
+    transition: opacity 0.5s ease, height 0.5s ease;
 }
 
 .causes-item:hover .causes-overlay {
@@ -90,16 +112,19 @@
     opacity: 1;
 }
 
-/* Service Item Styles */
+/* ==============================
+   Service Item Styles
+   ============================== */
 .service-item {
-    box-shadow: 0 0 45px rgba(0, 0, 0, .06);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.06);
 }
 
-/* Donate Section */
+/* ==============================
+   Donate Section
+   ============================== */
 .donate {
     position: relative;
-    background: rgb(30 122 129 / 18%);
-    opacity: 2;
+    background: var(--background-blur);
     overflow: hidden; /* Ensure no overflow if elements go beyond container */
 }
 
@@ -118,16 +143,120 @@
     z-index: -1; /* Place the blurred background behind the content */
 }
 
-/* Ensure the content (text, form, etc.) remains clear and above the blurred background */
-.donate .container {
-    position: relative;
-    z-index: 1;
+/* ==============================
+   Modal Styles
+   ============================== */
+.modal.fade.show.d-block {
+    display: block !important;
+    background-color: rgba(0, 0, 0, 0.5); /* Modal background color */
+    animation: fadeIn 0.5s ease-out; /* Fade-in animation */
 }
 
-/* Button Styles */
+.animated-modal {
+    animation: slideDown 0.5s ease-out; /* Slide-down animation */
+}
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
-/* Responsive Adjustments */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header,
+.modal-footer {
+    background-color: #f7f7f7;
+    border-bottom: none;
+    border-top: none;
+}
+
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* ==============================
+   Button Styles
+   ============================== */
+/* Add button styles here if needed */
+
+/* ==============================
+   Carousel Navigation
+   ============================== */
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff; /* Bootstrap primary blue */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.carousel-prev {
+    left: 1rem; /* Position to the left */
+}
+
+.carousel-next {
+    right: 1rem; /* Position to the right */
+}
+
+/* Change color on hover */
+.carousel-prev:hover, .carousel-next:hover {
+    background-color: #28a745; /* Green */
+    opacity: 1;
+}
+
+/* Custom icon styles */
+.carousel-prev-icon::before, .carousel-next-icon::before {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Left arrow icon */
+.carousel-prev-icon::before {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M11.354 1.354a.5.5 0 0 1 0 .707L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>');
+}
+
+/* Right arrow icon */
+.carousel-next-icon::before {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M4.646 1.354a.5.5 0 0 1 0 .707L10.293 8l-5.647 5.646a.5.5 0 0 1-.708.708l6-6a.5.5 0 0 1 0-.708l-6-6a.5.5 0 0 1 .708 0z"/></svg>');
+}
+
+/* ==============================
+   Responsive Adjustments
+   ============================== */
 @media (max-width: 768px) {
     .team-item .team-text {
         height: auto;
@@ -187,313 +316,26 @@
         height: 40px;
     }
 }
-.modal.fade.show.d-block {
-    display: block !important;
-    background-color: rgba(0, 0, 0, 0.5); /* Modal background color */
-    animation: fadeIn 0.5s ease-out; /* Fade-in animation */
-  }
-  
-  .animated-modal {
-    animation: slideDown 0.5s ease-out; /* Slide-down animation */
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideDown {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .modal-header,
-  .modal-footer {
-    background-color: #f7f7f7;
-    border-bottom: none;
-    border-top: none;
-  }
-  
-  .modal-content {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
- 
-  
-  /********** Template CSS **********/
 
-
-
-
-/*** Spinner ***/
-
-
-
-/*** Button ***/
-
-
-
-
-
-/*** Navbar ***/
-/*** Navbar ***/
-.fixed-top {
-    transition: background-color 0.5s ease, top 0.5s ease;
+/* ==============================
+   Glasnost Effect Styles
+   ============================== */
+   .glass-container {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 20px; /* Rounded corners */
+    backdrop-filter: blur(15px); /* Blur effect for the glass effect */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 1.1); /* Subtle shadow */
+    padding: 30px; /* Padding around the content */
 }
 
-/* Navbar when scrolling */
-.navbar-scroll {
-    background-color: #0f0e0e !important; /* Dark background */
-    box-shadow: 0px 4px 12px rgba(11, 11, 11, 0.1);
-}
-
-/* Top bar styles */
-.top-bar {
-    height: 45px;
-    background-color: #333; /* Consistent dark grey */
-    color: white;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    transition: top 0.5s ease;
-}
-
-/* Navbar links */
-.navbar .navbar-nav .nav-link {
-    margin-right: 30px;
-    padding: 25px 0;
-    color: #fff !important; /* White links */
-    font-weight: 500;
-    outline: none;
-    transition: color 0.3s ease;
-}
-
-/* Navbar links hover & active state */
-.navbar .navbar-nav .nav-link:hover,
-.navbar .navbar-nav .nav-link.active {
-    color: #cfcfcf !important; /* Light grey on hover/active */
-}
-
-/* Dropdown toggle arrow */
-.navbar .dropdown-toggle::after {
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    vertical-align: middle;
-    margin-left: 8px;
-    color: #fff;
-}
-
-/* Mobile navbar styles */
-@media (max-width: 991.98px) {
-    .navbar .navbar-nav {
-        margin-top: 10px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        background-color: rgba(15, 14, 14, 0.8) !important; /* Slightly transparent dark background */
-        z-index: 1;
-    }
-
-    .navbar .navbar-nav .nav-link {
-        padding: 10px 0;
-        color: #fff !important; /* White links */
-    }
-}
-
-/* Dropdown hover and animations for large screens */
-@media (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu {
-        display: block;
-        visibility: hidden;
-        top: 100%;
-        transform: rotateX(-75deg);
-        transform-origin: 0% 0%;
-        transition: transform 0.5s, opacity 0.5s;
-        opacity: 0;
-        background-color: #0f0e0e; /* Dropdown menu background matches navbar */
-    }
-
-    .navbar .nav-item:hover .dropdown-menu {
-        transform: rotateX(0deg);
-        visibility: visible;
-        opacity: 1;
-    }
-}
-
-
-
-
-/*** Header ***//* Ensure equal height for carousel images */
-#header-carousel .carousel-item {
-    height: 600px; /* Set a fixed height for all carousel items */
-}
-
-#header-carousel .carousel-item img {
-    width: 100%; /* Ensure images cover the full width */
-    height: 100%; /* Ensure images cover the full height */
-    object-fit: cover; /* Maintain aspect ratio while filling the container */
-}
-
-/* Optional: Adjust carousel item height for smaller screens */
-@media (max-width: 768px) {
-    #header-carousel .carousel-item {
-        height: 300px; /* Adjust height for smaller screens */
-    }
-}
-
-.carousel-caption {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: rgba(0, 29, 35, .8);
-    z-index: 1;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    width: 15%;
-    z-index: 1000;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 3rem;
-    height: 3rem;
-    background-color: var(--dark);
-    border: 12px solid var(--dark);
-    border-radius: 3rem;
-}
-
-@media (max-width: 768px) {
-    #header-carousel .carousel-item {
-        position: relative;
-        min-height: 450px;
-    }
-
-    #header-carousel .carousel-item img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-
-.page-header {
-    padding-top: 12rem;
-    padding-bottom: 6rem;
-    background: linear-gradient(rgba(0, 29, 35, .8), rgba(0, 29, 35, .8)), url(/apps/src/assets/img/) center center no-repeat;
-    background-size: cover;
-}
-
-.page-header .breadcrumb-item+.breadcrumb-item::before {
-    color: #999999;
-}
-
-
-/*** Causes ***/
-
-
-
-/*** Service ***/
+/* Service items remain unchanged, but if you want, you can add hover effects here */
 .service-item {
-    box-shadow: 0 0 45px rgba(0, 0, 0, .06);
+    background: transparent; /* Ensure service items are transparent to show the glass effect */
+    border: none; /* Remove border */
 }
 
-
-/*** Donate ***/
-.donate {
-    background: rgba(42, 45, 46, 0.8);
-    opacity: 2;
+/* Optional: Add hover effects to service items */
+.service-item:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    transition: transform 0.3s ease; /* Smooth transition */
 }
-
-
-
-
-
-
-
-/*** Testimonial ***/
-
-
-/*** Footer ***/
-
-.carousel-prev, .carousel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #007bff; /* Bootstrap primary blue */
-    border: none;
-    border-radius: 50%; /* Circular buttons */
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: background-color 0.3s, opacity 0.3s;
-  }
-  
-  .carousel-prev {
-    left: 1rem; /* Position to the left */
-  }
-  
-  .carousel-next {
-    right: 1rem; /* Position to the right */
-  }
-  
-  /* Change color on hover */
-  .carousel-prev:hover, .carousel-next:hover {
-    background-color: #28a745; /* Green */
-    opacity: 1;
-  }
-  
-  /* Custom icon styles */
-  .carousel-prev-icon::before, .carousel-next-icon::before {
-    content: '';
-    display: block;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  /* Left arrow icon */
-  .carousel-prev-icon::before {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M11.354 1.354a.5.5 0 0 1 0 .707L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>');
-  }
-  
-  /* Right arrow icon */
-  .carousel-next-icon::before {
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 16 16"><path d="M4.646 1.354a.5.5 0 0 1 0 .707L10.293 8l-5.647 5.646a.5.5 0 0 1-.708.708l6-6a.5.5 0 0 1 0-.708l-6-6a.5.5 0 0 1 .708 0z"/></svg>');
-  }
-  
-  
-  
-
-
-
-
-
-  
