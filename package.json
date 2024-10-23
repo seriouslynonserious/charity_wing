@@ -6,7 +6,9 @@
     "@angular/platform-browser-dynamic": "^18.2.5",
     "@angular/router": "^18.2.5",
     "bootstrap": "^5.3.3",
-    "jspdf": "^2.4.0",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.2",
+    "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.5.23",
     "ngx-owl-carousel-o": "^18.0.0"
   },

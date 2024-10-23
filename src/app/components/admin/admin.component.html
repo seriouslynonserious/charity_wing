@@ -115,18 +115,18 @@
   <!-- Blood Donor List -->
   
 
-  <div *ngIf="showDonorList" class="">
+  <div *ngIf="showDonorList" class="" id="bloodDonorList">
     <div class="text-center causes-overlay">
-      <button type="button " class="btn custom-btn text-white btn-outline-primary" data-bs-toggle="modal"
-        data-bs-target="#donationModal">
+      <button type="button " class="btn custom-btn " data-bs-toggle="modal" data-bs-target="#donationModal">
         Open Donation Form
         <div class="d-inline-flex btn-sm-square  text-white rounded-circle ms-2">
           <i class="fa fa-arrow-right"></i>
         </div>
       </button>
+      <button  class="btn custom-btn " (click)="downloadPDF('bloodDonorList', 'Blood_Donor_List')">Download PDF</button>
     </div>
     
-    <div class="table-responsive table-container table-container table-glassmorphism">
+    <div class="table-responsive table-container table-container table-glassmorphism" id="bloodDonorList">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
           <tr >
@@ -136,7 +136,7 @@
             <th>Contact</th>
             <th>Address</th>
             <th>Donation Date</th>
-            <th>Actions</th>
+            <th class="action-column">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -147,28 +147,29 @@
             <td>{{ donor.contact }}</td>
             <td>{{ donor.address }}</td>
             <td>{{ donor.donationDate }}</td>
-            <td>
+            <td class="action-column">
               <button class="btn btn-danger btn-sm" (click)="deleteDonor(donor.name)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
+  </div> 
 
 
 
 
   
 
-  <div *ngIf="showDonationList" class="">
+  <div *ngIf="showDonationList" class="" >
     <div class="text-center">
       <button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#donationModals">
         Open Donation Form
       </button>
+      <button class="btn custom-btn" (click)="downloadPDF('birthdayDonorList', 'BirthdayDonor_List')">Download PDF</button>
     </div>
     
-    <div class="table-responsive table-container table-container table-glassmorphism">
+    <div class="table-responsive table-container table-container table-glassmorphism" id="birthdayDonorList">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
           <tr>
@@ -177,7 +178,7 @@
             <th>Email</th>
             <th>Message</th>
             <th>Donation Date</th>
-            <th>Actions</th>
+            <th class="action-column">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -187,7 +188,7 @@
             <td>{{ donation.email }}</td>
             <td>{{ donation.message || 'N/A' }}</td>
             <td>{{ donation.donationDate }}</td>
-            <td>
+            <td class="action-column">
               <button class="btn btn-danger btn-sm" (click)="deleteDonation(donation.donorName)">Delete</button>
             </td>
           </tr>
@@ -211,9 +212,10 @@
           <i class="fa fa-arrow-right"></i>
         </div>
       </button>
+      <button class="btn custom-btn" (click)="downloadPDF('PatientList', 'Patient_List')">Download PDF</button>
     </div>
     
-    <div class="table-responsive table-container table-container table-glassmorphism">
+    <div class="table-responsive table-container table-container table-glassmorphism" id="PatientList">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
           <tr>
@@ -223,7 +225,7 @@
             <th>Age</th>
             <th>Gender</th>
             <th>Address</th>
-            <th>Actions</th>
+            <th class="action-column">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -234,7 +236,7 @@
             <td>{{ patient.age }}</td>
             <td>{{ patient.gender }}</td>
             <td>{{ patient.address }}</td>
-            <td>
+            <td class="action-column">
               <button class="btn btn-danger btn-sm" (click)="deletePatient(patient.name)">Delete</button>
             </td>
           </tr>
@@ -255,9 +257,10 @@
       <button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#hairDonationModal">
         Open Hair Donation Form
       </button>
+      <button class="btn custom-btn" (click)="downloadPDF('HairDonorList', 'HairDonor_List')">Download PDF</button>
     </div>
     
-    <div class="table-responsive table-container table-container table-glassmorphism">
+    <div class="table-responsive table-container table-container table-glassmorphism" id="HairDonorList">
       <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
           <tr>
@@ -268,7 +271,7 @@
             <th>Gender</th>
             <th>Hair Length</th>
             <th>Donation Date</th>
-            <th>Actions</th>
+            <th class="action-column">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -280,7 +283,7 @@
             <td>{{ donor.gender }}</td>
             <td>{{ donor.hairLength }} inches</td>
             <td>{{ donor.donationDate }}</td>
-            <td>
+            <td class="action-column">
               <button class="btn btn-danger btn-sm" (click)="deleteHairDonor(donor.name)">Delete</button>
             </td>
           </tr>
@@ -332,95 +335,6 @@
     </div>
   </div>
 </div>
-
-<!-- Patient modal -->
-<div class="modal fade" id="patientdonationModal" tabindex="-1" aria-labelledby="donationModalLabel"
-aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="donationModalLabel">Gift of Giving</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <form class="donation-form shadow p-4 bg-white rounded" #patientForm="ngForm"
-        (ngSubmit)="addPatient(patientForm)">
-        <h2 class="text-center mb-4">Drug Wing</h2>
-
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input id="name" [(ngModel)]="name" name="name" required minlength="2" #nameInput="ngModel"
-            class="form-control">
-          <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
-            <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
-            <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters
-              long.</small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="condition">Condition:</label>
-          <input id="condition" [(ngModel)]="condition" name="condition" required minlength="3"
-            #conditionInput="ngModel" class="form-control">
-          <div *ngIf="conditionInput.invalid && conditionInput.touched" class="text-danger">
-            <small *ngIf="conditionInput.errors?.['required']">Condition is required.</small>
-            <small *ngIf="conditionInput.errors?.['minlength']">Condition must be at least 3 characters
-              long.</small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="contact">Contact:</label>
-          <input type="tel" id="contact" [(ngModel)]="contact" name="contact" required pattern="^[0-9]{10}$"
-            #contactInput="ngModel" class="form-control">
-          <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
-            <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
-            <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact
-              number.</small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input type="number" id="age" [(ngModel)]="age" name="age" required min="1" max="120" #ageInput="ngModel"
-            class="form-control">
-          <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
-            <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
-            <small *ngIf="ageInput.errors?.['min']">Age must be at least 1.</small>
-            <small *ngIf="ageInput.errors?.['max']">Age must be below 100.</small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="gender">Gender:</label>
-          <select id="gender" [(ngModel)]="gender" name="gender" required #genderInput="ngModel"
-            class="form-control">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <div *ngIf="genderInput.invalid && genderInput.touched" class="text-danger">
-            <small *ngIf="genderInput.errors?.['required']">Gender is required.</small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="address">Address:</label>
-          <input id="address" [(ngModel)]="address" name="address" required minlength="5" #addressInput="ngModel"
-            class="form-control">
-          <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
-            <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
-            <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 5 characters
-              long.</small>
-          </div>
-        </div>
-        <button type="submit" class="btn custom-btn btn-block" [disabled]="patientForm.invalid">Register
-          Patient</button>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
 <!--hair doanr modal-->
 <div class="modal fade" id="hairDonationModal" tabindex="-1" aria-labelledby="hairDonationModalLabel"
     aria-hidden="true">
@@ -470,77 +384,164 @@ aria-hidden="true">
       </div>
     </div>
   </div>
-  <!--Blood donar list-->
-  <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="donationModalLabel">Gift of Giving</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form class="donation-form shadow p-4 bg-white rounded" (ngSubmit)="addDonor()" #donationForm="ngForm">
+<!-- Patient modal -->
+<!-- Patient List Modal -->
+<div class="modal fade" id="patientdonationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donationModalLabel">Gift of Giving - Patient List (Drug Wing)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form shadow p-4 bg-white rounded" #patientForm="ngForm" (ngSubmit)="addPatient(patientForm)">
 
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input id="name" [(ngModel)]="name" name="name" required minlength="2" #nameInput="ngModel"
-                class="form-control">
-              <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
-                <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
-                <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters long.</small>
-              </div>
+          <div class="form-group">
+            <label for="patientName">Patient Name:</label>
+            <input id="patientName" [(ngModel)]="patientName" name="patientName" required minlength="2" #nameInput="ngModel"
+              class="form-control">
+            <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+              <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+              <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters long.</small>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="age">Age:</label>
-              <input type="number" id="age" [(ngModel)]="age" name="age" required min="18" max="65" #ageInput="ngModel"
-                class="form-control">
-              <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
-                <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
-                <small *ngIf="ageInput.errors?.['min']">Age must be at least 18.</small>
-                <small *ngIf="ageInput.errors?.['max']">Age must be 65 or younger.</small>
-              </div>
+          <div class="form-group">
+            <label for="condition">Condition:</label>
+            <input id="condition" [(ngModel)]="condition" name="condition" required minlength="3" #conditionInput="ngModel"
+              class="form-control">
+            <div *ngIf="conditionInput.invalid && conditionInput.touched" class="text-danger">
+              <small *ngIf="conditionInput.errors?.['required']">Condition is required.</small>
+              <small *ngIf="conditionInput.errors?.['minlength']">Condition must be at least 3 characters long.</small>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="bloodGroup">Blood Group:</label>
-              <input id="bloodGroup" [(ngModel)]="bloodGroup" name="bloodGroup" required pattern="^(A|B|AB|O)[+-]$"
-                #bloodGroupInput="ngModel" class="form-control">
-              <div *ngIf="bloodGroupInput.invalid && bloodGroupInput.touched" class="text-danger">
-                <small *ngIf="bloodGroupInput.errors?.['required']">Blood group is required.</small>
-                <small *ngIf="bloodGroupInput.errors?.['pattern']">Enter a valid blood group (e.g., A+, B-, AB+,
-                  O+).</small>
-              </div>
+          <div class="form-group">
+            <label for="patientContact">Contact:</label>
+            <input type="tel" id="patientContact" [(ngModel)]="patientContact" name="patientContact" required pattern="^[0-9]{10}$"
+              #contactInput="ngModel" class="form-control">
+            <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
+              <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
+              <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact number.</small>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="contact">Contact:</label>
-              <input type="tel" id="contact" [(ngModel)]="contact" name="contact" required pattern="^[0-9]{10}$"
-                #contactInput="ngModel" class="form-control">
-              <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
-                <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
-                <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact number.</small>
-              </div>
+          <div class="form-group">
+            <label for="patientAge">Age:</label>
+            <input type="number" id="patientAge" [(ngModel)]="patientAge" name="patientAge" required min="1" max="120"
+              #ageInput="ngModel" class="form-control">
+            <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
+              <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
+              <small *ngIf="ageInput.errors?.['min']">Age must be at least 1.</small>
+              <small *ngIf="ageInput.errors?.['max']">Age must be below 120.</small>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="address">Address:</label>
-              <input id="address" [(ngModel)]="address" name="address" required minlength="10" #addressInput="ngModel"
-                class="form-control">
-              <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
-                <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
-                <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 10 characters long.</small>
-              </div>
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" [(ngModel)]="gender" name="gender" required #genderInput="ngModel"
+              class="form-control">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="genderInput.invalid && genderInput.touched" class="text-danger">
+              <small *ngIf="genderInput.errors?.['required']">Gender is required.</small>
             </div>
+          </div>
 
-            <button type="submit" class="btn custom-btn btn-block" [disabled]="!donationForm.form.valid">
-              Add Donor
-            </button>
-          </form>
-        </div>
+          <div class="form-group">
+            <label for="patientAddress">Address:</label>
+            <input id="patientAddress" [(ngModel)]="patientAddress" name="patientAddress" required minlength="5"
+              #addressInput="ngModel" class="form-control">
+            <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+              <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
+              <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 5 characters long.</small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn custom-btn btn-block" [disabled]="patientForm.invalid">
+            Add Patient
+          </button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+
+  <!--Blood donar list-->
+  <!-- Blood Donor List Modal -->
+<div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donationModalLabel">Gift of Giving - Blood Donor List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="donation-form shadow p-4 bg-white rounded" (ngSubmit)="addDonor()" #donationForm="ngForm">
+
+          <div class="form-group">
+            <label for="b_donorName">Donor Name:</label>
+            <input id="b_donorName" [(ngModel)]="b_donorName" name="b_donorName" required minlength="2" #nameInput="ngModel"
+              class="form-control">
+            <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+              <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+              <small *ngIf="nameInput.errors?.['minlength']">Name must be at least 2 characters long.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="b_donorAge">Age:</label>
+            <input type="number" id="b_donorAge" [(ngModel)]="b_donorAge" name="b_donorAge" required min="18" max="65" #ageInput="ngModel"
+              class="form-control">
+            <div *ngIf="ageInput.invalid && ageInput.touched" class="text-danger">
+              <small *ngIf="ageInput.errors?.['required']">Age is required.</small>
+              <small *ngIf="ageInput.errors?.['min']">Age must be at least 18.</small>
+              <small *ngIf="ageInput.errors?.['max']">Age must be 65 or younger.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="b_bloodGroup">Blood Group:</label>
+            <input id="b_bloodGroup" [(ngModel)]="b_bloodGroup" name="b_bloodGroup" required pattern="^(A|B|AB|O)[+-]$"
+              #bloodGroupInput="ngModel" class="form-control">
+            <div *ngIf="bloodGroupInput.invalid && bloodGroupInput.touched" class="text-danger">
+              <small *ngIf="bloodGroupInput.errors?.['required']">Blood group is required.</small>
+              <small *ngIf="bloodGroupInput.errors?.['pattern']">Enter a valid blood group (e.g., A+, B-, AB+, O+).</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="b_donorContact">Contact:</label>
+            <input type="tel" id="b_donorContact" [(ngModel)]="b_donorContact" name="b_donorContact" required pattern="^[0-9]{10}$"
+              #contactInput="ngModel" class="form-control">
+            <div *ngIf="contactInput.invalid && contactInput.touched" class="text-danger">
+              <small *ngIf="contactInput.errors?.['required']">Contact number is required.</small>
+              <small *ngIf="contactInput.errors?.['pattern']">Enter a valid 10-digit contact number.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="b_donorAddress">Address:</label>
+            <input id="b_donorAddress" [(ngModel)]="b_donorAddress" name="b_donorAddress" required minlength="10" #addressInput="ngModel"
+              class="form-control">
+            <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+              <small *ngIf="addressInput.errors?.['required']">Address is required.</small>
+              <small *ngIf="addressInput.errors?.['minlength']">Address must be at least 10 characters long.</small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn custom-btn btn-block" [disabled]="donationForm.invalid">
+            Add Donor
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

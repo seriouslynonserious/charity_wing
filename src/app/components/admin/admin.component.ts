@@ -6,13 +6,14 @@ import { DonationService } from '../../services/donation.service';
 import { HairDonationService } from '../../services/hair-donation.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import html2pdf from 'html2pdf.js';
 declare var bootstrap: any;
 
 interface Patient {
   name: string;
   condition: string;
   contact: string;
-  age: number;
+  age: number|null;
   gender: string;
   address: string;
 }
@@ -62,11 +63,19 @@ export class AdminComponent implements OnInit {
   hairDonors$: Observable<HairDonor[]>;
 
   // BLOOD-WING.COMPOENTN
-  name: string = '';
-  age: number = 0;
-  bloodGroup: string = '';
-  contact: string = '';
-  address: string = '';
+  b_donorName: string = '';
+  b_bloodGroup: string = '';
+  b_donorContact: string = '';
+  b_donorAge: number | null = null;
+  b_donorAddress: string = '';
+
+  //patient list
+  patientName: string = '';
+  condition: string = '';
+  patientContact: string = '';
+  patientAge: number | null = null;
+  patientAddress: string = '';
+  gender: string = '';
 
   // GIFT-OF-GIVING.COMPOENTN
   donorName: string = '';
@@ -86,9 +95,8 @@ export class AdminComponent implements OnInit {
     donationDate: ''
   };
 
-  // drug-wing
-  condition: string = '';
-  gender: string = '';
+  
+  
 
   // For Image Upload
   selectedFile: string[] = [];
@@ -170,38 +178,7 @@ export class AdminComponent implements OnInit {
   }
 
   // Blood Wing Functions
-  addDonor(): void {
-    if (this.name && this.age && this.bloodGroup && this.contact && this.address) {
-      const currentDate = new Date().toLocaleDateString(); // Get current date in a readable format
-
-      const newDonor: BloodDonor = {
-        name: this.name,
-        age: this.age,
-        bloodGroup: this.bloodGroup,
-        contact: this.contact,
-        address: this.address,
-        donationDate: currentDate // Add current date
-      };
-
-      this.bloodDonorService.addDonor(newDonor);
-
-      // Reset form fields
-      this.name = '';
-      this.age = 0;
-      this.bloodGroup = '';
-      this.contact = '';
-      this.address = '';
-
-      this.closeModal();
-    } else {
-      alert('Please fill in all required fields.');
-    }
-  }
-
-  closeModal() {
-    const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
-    donationModal.hide();
-  }
+  
 
   // Gift of Giving Functions
   makeBirthdayDonation(): void {
@@ -264,16 +241,49 @@ export class AdminComponent implements OnInit {
     donationModalss.hide();
   }
 
+
+  addDonor(): void {
+    if (this.b_donorName && this.b_donorAge && this.b_bloodGroup && this.b_donorContact && this.b_donorAddress) {
+      const currentDate = new Date().toLocaleDateString(); // Get current date in a readable format
+
+      const  b_donorData = {
+        name: this.b_donorName,
+        bloodGroup: this.b_bloodGroup,
+        contact: this.b_donorContact,
+        age: this.b_donorAge,
+        address: this.b_donorAddress,
+        donationDate: currentDate // Add current date
+      };
+
+      this.bloodDonorService.addDonor(b_donorData);
+
+      // Reset form fields
+      this.b_donorName = '';
+      this.b_bloodGroup = '';
+      this.b_donorContact = '';
+      this.b_donorAge = null;
+      this.b_donorAddress = '';
+
+      this.closeModal();
+    } else {
+      alert('Please fill in all required fields.');
+    }
+  }
+
+  closeModal() {
+    const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+    donationModal.hide();
+  }
   // Drug Wing Functions
   addPatient(patientForm: NgForm): void {
     if (patientForm.valid) {
       const newPatient = {
-        name: this.name,
-        condition: this.condition,
-        contact: this.contact,
-        age: this.age,
-        gender: this.gender,
-        address: this.address
+        name: this.patientName,
+      condition: this.condition,
+      contact: this.patientContact,
+      age: this.patientAge ?? 0,
+      address: this.patientAddress,
+      gender: this.gender
       };
 
       this.drugWingService.addPatient(newPatient);
@@ -380,4 +390,39 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  /**
+   * Download the given section as a PDF
+   * @param elementId ID of the HTML element to download
+   * @param filename Name of the generated PDF file
+   */
+  downloadPDF(elementId: string, filename: string): void {
+    const element = document.getElementById(elementId);
+  
+    // Hide the "Actions" column
+    const actionCells = document.querySelectorAll('.action-column');
+    actionCells.forEach(cell => (cell as HTMLElement).style.display = 'none');
+  
+    setTimeout(() => {
+      if (element) {
+        const options = {
+          margin: 0.5,
+          filename: `${filename}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 1.5 },  // Adjust scale if necessary
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+        };
+  
+        html2pdf()
+          .from(element)
+          .set(options)
+          .save()
+          .then(() => {
+            // Show the "Actions" column again
+            actionCells.forEach(cell => (cell as HTMLElement).style.display = '');
+          });
+      }
+    }, 500); // Delay for 500ms to allow Angular binding to complete
+  }
+  
+  
 }
