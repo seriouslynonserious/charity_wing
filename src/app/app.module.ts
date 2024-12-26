@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module'; // This already contains RouterModule configuration
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { BloodWingComponent } from './components/blood-wing/blood-wing.component';
@@ -39,6 +40,7 @@ import { PalliativeWingComponent } from './components/palliative-wing/palliative
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     // Make sure this is required, otherwise you can use the standard animations provider

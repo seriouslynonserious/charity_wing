@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HairDonationService } from '../../services/hair-donation.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import 'jspdf-autotable';
-
 declare var bootstrap: any;
 
 interface HairDonor {
+  id: number; // Unique ID for each donor
   name: string;
   contact: string;
   email: string;
   age: number;
   gender: string;
   hairLength: number;
-  donationDate: string; // Added donation date
+  donationDate: string;
 }
 
 @Component({
@@ -22,7 +21,7 @@ interface HairDonor {
   templateUrl: './hair-to-care.component.html',
   styleUrls: ['./hair-to-care.component.css']
 })
-export class HairToCareComponent implements OnInit {
+export class HairToCareComponent implements OnInit, AfterViewInit {
   hairDonors$: Observable<HairDonor[]>;
   filteredHairDonors$: Observable<HairDonor[]>;
 
@@ -30,14 +29,17 @@ export class HairToCareComponent implements OnInit {
   private searchSubject = new BehaviorSubject<string>('');
 
   donor: HairDonor = {
+    id: 0,
     name: '',
     contact: '',
     email: '',
     age: 0,
     gender: '',
     hairLength: 0,
-    donationDate: '' 
+    donationDate: ''
   };
+
+  private modalInstances: { [key: string]: any } = {};
 
   constructor(private hairDonationService: HairDonationService) {
     // Load all hair donors
@@ -59,65 +61,94 @@ export class HairToCareComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const initialModal = new bootstrap.Modal(document.getElementById('initialModal'));
-    initialModal.show();
+    // Any other initialization logic can go here
+  }
+
+  ngAfterViewInit(): void {
+    const initialModalElement = document.getElementById('initialModal');
+    if (initialModalElement) {
+      this.modalInstances['initialModal'] = new bootstrap.Modal(initialModalElement);
+      this.modalInstances['initialModal'].show();
+    }
+  }
+
+  private getModalInstance(modalId: string): any {
+    if (!this.modalInstances[modalId]) {
+      const modalElement = document.getElementById(modalId);
+      if (modalElement) {
+        this.modalInstances[modalId] = new bootstrap.Modal(modalElement);
+      }
+    }
+    return this.modalInstances[modalId];
   }
 
   openDonationForm(): void {
-    const initialModal = bootstrap.Modal.getInstance(document.getElementById('initialModal'));
-    const donationModal = new bootstrap.Modal(document.getElementById('hairDonationModal'));
+    const initialModal = this.getModalInstance('initialModal');
+    const donationModal = this.getModalInstance('hairDonationModal');
 
-    initialModal.hide();
-    donationModal.show();
+    initialModal?.hide();
+    donationModal?.show();
   }
 
   openDonorList(): void {
-    const initialModal = bootstrap.Modal.getInstance(document.getElementById('initialModal'));
-    const donorListModal = new bootstrap.Modal(document.getElementById('donorListModal'));
-    
-    initialModal.hide();
-    donorListModal.show();
+    const initialModal = this.getModalInstance('initialModal');
+    const donorListModal = this.getModalInstance('donorListModal');
+
+    initialModal?.hide();
+    donorListModal?.show();
   }
 
   addDonorhair(): void {
-    // Check if all required fields are filled
-    if (this.donor.name && this.donor.contact && this.donor.email && this.donor.age && this.donor.gender && this.donor.hairLength) {
-      // Automatically set the donation date to the current date
+    if (this.donor.name && this.donor.contact && this.donor.email && this.donor.age > 0 && this.donor.gender && this.donor.hairLength > 0) {
       this.donor.donationDate = new Date().toLocaleDateString();
 
-      // Add the donor to the service
-      this.hairDonationService.addHairDonor(this.donor);
-
-      // Reset form fields
-      this.resetFormFields();
-      this.closeModal();
+      this.hairDonationService.addHairDonor(this.donor).subscribe({
+        next: () => {
+          alert('Donor added successfully!');
+          this.resetFormFields();
+          this.closeModal('hairDonationModal');
+        },
+        error: (err: any) => {
+          console.error('Error adding donor:', err);
+          alert('Failed to add donor. Please try again.');
+        }
+      });
     } else {
       alert('Please fill in all required fields.');
     }
   }
 
-  closeModal() {
-    const donationModal = bootstrap.Modal.getInstance(document.getElementById('hairDonationModal'));
-    donationModal.hide();
+  deleteDonor(donorId: number): void {
+    this.hairDonationService.deleteHairDonor(donorId).subscribe({
+      next: () => {
+        alert('Donor deleted successfully!');
+      },
+      error: (err: any) => {
+        console.error('Error deleting donor:', err);
+        alert('Failed to delete donor. Please try again.');
+      }
+    });
   }
 
-  resetFormFields() {
+  closeModal(modalId: string): void {
+    const modalInstance = this.getModalInstance(modalId);
+    modalInstance?.hide();
+  }
+
+  resetFormFields(): void {
     this.donor = {
+      id: 0,
       name: '',
       contact: '',
       email: '',
       age: 0,
       gender: '',
       hairLength: 0,
-      donationDate: '' // Reset donation date after submission
+      donationDate: ''
     };
   }
 
-  // Method to update the search term
   onSearchTermChange(newTerm: string): void {
     this.searchSubject.next(newTerm);
   }
-
-  // Download PDF functionality
-  
 }

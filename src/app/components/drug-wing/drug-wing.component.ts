@@ -3,6 +3,7 @@ import { DrugWingService } from '../../services/drug-wing.service';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
 declare var bootstrap: any;
+
 @Component({
   selector: 'app-drug-wing',
   templateUrl: './drug-wing.component.html',
@@ -15,7 +16,7 @@ export class DrugWingComponent implements OnInit {
   age: number = 0;
   gender: string = '';
   address: string = '';
- 
+  date: string = ''; // New field for date
 
   // Observable to hold patients list
   patients$: Observable<any> | undefined;
@@ -29,12 +30,10 @@ export class DrugWingComponent implements OnInit {
     initialModal.show();
   }
 
-  
- 
   openDonorList(): void {
     const initialModal = bootstrap.Modal.getInstance(document.getElementById('initialModal'));
     const donorListModal = new bootstrap.Modal(document.getElementById('donorListModal'), {});
-   initialModal.hide();
+    initialModal.hide();
     donorListModal.show();
   }
 
@@ -48,7 +47,7 @@ export class DrugWingComponent implements OnInit {
         age: this.age,
         gender: this.gender,
         address: this.address,
-       
+        date: this.date || new Date().toISOString() // Use provided date or current date
       };
 
       this.drugWingService.addPatient(newPatient); // Call service to add the new patient
@@ -56,10 +55,9 @@ export class DrugWingComponent implements OnInit {
       // Reset the form after adding a patient
       patientForm.resetForm();
       this.closeModal();
-      
-      
     }
   }
+
   closeModal() {
     const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
     donationModal.hide();

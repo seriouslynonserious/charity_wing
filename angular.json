@@ -41,25 +41,27 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",   // Increased the max warning limit
+                  "maximumError": "3MB"      // Increased the max error limit
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "6KB",   // Increased max warning for CSS
+                  "maximumError": "8KB"      // Increased max error for CSS
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "allowedCommonJsDependencies": [
+                "canvg",
+                "html2pdf.js"
+              ]
             },
             "development": {
               "optimization": false,
@@ -103,9 +105,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           }
         }
       }

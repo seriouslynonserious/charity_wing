@@ -30,12 +30,7 @@
     transition: width 5s ease;
     background-color: #e3342f; /* Red theme for progress bar */
 }
-.image-container img {
-    width: 100%; 
-    height: 280px;
-    object-fit: cover;
-    
-}
+
 .causes-item .progress .progress-bar span {
     position: absolute;
     top: -7px;
@@ -488,3 +483,4 @@
 .footer .copyright a:hover {
     color: var(--primary);
 }
+

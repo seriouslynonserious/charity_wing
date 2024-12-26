@@ -48,7 +48,7 @@
 <!-- togglebutton -->
 
 <div class="hero-background">
-  <h2 class="text-center mt-4">Admin Panel</h2>
+  
   <nav class="sidebar glassmorphism-navbar">
     <ul class="menu_list">
       <!-- Blood Donor List -->
@@ -148,7 +148,7 @@
             <td>{{ donor.address }}</td>
             <td>{{ donor.donationDate }}</td>
             <td class="action-column">
-              <button class="btn btn-danger btn-sm" (click)="deleteDonor(donor.name)">Delete</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteDonor(donor.id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -225,6 +225,7 @@
             <th>Age</th>
             <th>Gender</th>
             <th>Address</th>
+            <th>Date</th>
             <th class="action-column">Actions</th>
           </tr>
         </thead>
@@ -236,6 +237,7 @@
             <td>{{ patient.age }}</td>
             <td>{{ patient.gender }}</td>
             <td>{{ patient.address }}</td>
+            <td>{{patient.date}}</td>
             <td class="action-column">
               <button class="btn btn-danger btn-sm" (click)="deletePatient(patient.name)">Delete</button>
             </td>
@@ -284,7 +286,7 @@
             <td>{{ donor.hairLength }} inches</td>
             <td>{{ donor.donationDate }}</td>
             <td class="action-column">
-              <button class="btn btn-danger btn-sm" (click)="deleteHairDonor(donor.name)">Delete</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteHairDonor(donor.id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -460,6 +462,14 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label for="patientDate">Date:</label>
+            <input type="date" id="patientDate" [(ngModel)]="date" name="date" required #dateInput="ngModel" class="form-control">
+            <div *ngIf="dateInput.invalid && dateInput.touched" class="text-danger">
+              <small *ngIf="dateInput.errors?.['required']">Date is required.</small>
+            </div>
+          </div>
+
           <button type="submit" class="btn custom-btn btn-block" [disabled]="patientForm.invalid">
             Add Patient
           </button>
@@ -468,6 +478,7 @@
     </div>
   </div>
 </div>
+
 
 
   <!--Blood donar list-->

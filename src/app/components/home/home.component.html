@@ -5,14 +5,13 @@
     <div id="top-bar" class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
         <div class="col-lg-6 px-5 text-start">
             <small><i class="fa fa-map-marker-alt me-2"></i>123 Street,India</small>
-            <small class="ms-4"><i class="fa fa-envelope me-2"></i>info.com</small>
+            <small class="ms-4"><i class="fa fa-envelope me-2"></i>{{email}}</small>
         </div>
         <div class="col-lg-6 px-5 text-end">
             <small>Follow us:</small>
             <a class="text-white-50 ms-3" href="#"><i class="fab fa-facebook-f"></i></a>
-            <a class="text-white-50 ms-3" href="#"><i class="fab fa-twitter"></i></a>
-            <a class="text-white-50 ms-3" href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a class="text-white-50 ms-3" href="#"><i class="fab fa-instagram"></i></a>
+            
+            <a class="text-white-50 ms-3" href="https://www.instagram.com/punarjjani_tmc/"><i class="fab fa-instagram"></i></a>
         </div>
     </div>
 
@@ -151,7 +150,7 @@
   
   <!-- Bootstrap Carousel Modal -->
   <div class="modal fade" id="carouselModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered glass-container">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Image Carousel</h5>
@@ -159,17 +158,17 @@
         </div>
         <div class="modal-body">
           <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="height: 400px; overflow: hidden;">
               <div *ngFor="let image of images; let i = index" 
                    class="carousel-item" [class.active]="i === 0">
-                <img [src]="image" class="d-block w-100" alt="Image {{i + 1}}">
+                <img [src]="image" class="d-block w-100 h-100 object-fit-cover" alt="Image {{i + 1}}">
               </div>
             </div>
             <button class="carousel-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
               <span class="carousel-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-next" type="button"  data-bs-target="#carouselExample" data-bs-slide="next">
+            <button class="carousel-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
               <span class="carousel-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
@@ -178,6 +177,7 @@
       </div>
     </div>
   </div>
+  
   
 
   

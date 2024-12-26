@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   images: string[] = []; // Store images from local storage
   carouselModal: any; // Reference to Bootstrap modal
+  email: string = 'punarjjanitmc123@gmail.com';
 
   ngOnInit(): void {
     // Load images from local storage

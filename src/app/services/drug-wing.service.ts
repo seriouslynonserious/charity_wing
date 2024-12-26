@@ -8,7 +8,7 @@ interface Patient {
   age: number;
   gender: string;
   address: string;
-  
+  date: string; // New date field
 }
 
 @Injectable({

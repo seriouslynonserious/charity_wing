@@ -7,6 +7,8 @@ import { HairDonationService } from '../../services/hair-donation.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import html2pdf from 'html2pdf.js';
+import { BloodDonor } from '../../models/blood-donor.model';
+
 declare var bootstrap: any;
 
 interface Patient {
@@ -16,16 +18,10 @@ interface Patient {
   age: number|null;
   gender: string;
   address: string;
+  date: string;
 }
 
-interface BloodDonor {
-  name: string;
-  age: number;
-  bloodGroup: string;
-  contact: string;
-  address: string;
-  donationDate: string;
-}
+
 
 interface Donation {
   donorName: string;
@@ -36,6 +32,7 @@ interface Donation {
 }
 
 interface HairDonor {
+  id:number;
   name: string;
   contact: string;
   email: string;
@@ -63,6 +60,7 @@ export class AdminComponent implements OnInit {
   hairDonors$: Observable<HairDonor[]>;
 
   // BLOOD-WING.COMPOENTN
+  
   b_donorName: string = '';
   b_bloodGroup: string = '';
   b_donorContact: string = '';
@@ -76,6 +74,7 @@ export class AdminComponent implements OnInit {
   patientAge: number | null = null;
   patientAddress: string = '';
   gender: string = '';
+  date:string='';
 
   // GIFT-OF-GIVING.COMPOENTN
   donorName: string = '';
@@ -86,6 +85,7 @@ export class AdminComponent implements OnInit {
 
   // hair-donor.component
   donor: HairDonor = {
+    id:0,
     name: '',
     contact: '',
     email: '',
@@ -226,6 +226,7 @@ export class AdminComponent implements OnInit {
 
   resetFormFields() {
     this.donor = {
+      id:0,
       name: '',
       contact: '',
       email: '',
@@ -244,7 +245,8 @@ export class AdminComponent implements OnInit {
 
   addDonor(): void {
     if (this.b_donorName && this.b_donorAge && this.b_bloodGroup && this.b_donorContact && this.b_donorAddress) {
-      const currentDate = new Date().toLocaleDateString(); // Get current date in a readable format
+      const currentDate = new Date().toLocaleDateString(); 
+      // Get current date in a readable format
 
       const  b_donorData = {
         name: this.b_donorName,
@@ -258,6 +260,7 @@ export class AdminComponent implements OnInit {
       this.bloodDonorService.addDonor(b_donorData);
 
       // Reset form fields
+      
       this.b_donorName = '';
       this.b_bloodGroup = '';
       this.b_donorContact = '';
@@ -269,6 +272,12 @@ export class AdminComponent implements OnInit {
       alert('Please fill in all required fields.');
     }
   }
+  deleteDonor(id: number): void {
+    if (confirm('Are you sure you want to delete this donor?')) {
+      this.bloodDonorService.deleteDonor(id);
+    }
+  }
+  
 
   closeModal() {
     const donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
@@ -283,7 +292,8 @@ export class AdminComponent implements OnInit {
       contact: this.patientContact,
       age: this.patientAge ?? 0,
       address: this.patientAddress,
-      gender: this.gender
+      gender: this.gender,
+      date:this.date
       };
 
       this.drugWingService.addPatient(newPatient);
@@ -300,14 +310,10 @@ export class AdminComponent implements OnInit {
 
  
   // Delete Functions
-  deleteDonor(donorName: string): void {
-    this.bloodDonorService.deleteDonor(donorName);
-    
+ 
 
-  }
-
-  deleteHairDonor(name: string) {
-    this.hairDonationService.deleteHairDonor(name);
+  deleteHairDonor(id: number) {
+    this.hairDonationService.deleteHairDonor(id);
   }
 
   deletePatient(name: string): void {

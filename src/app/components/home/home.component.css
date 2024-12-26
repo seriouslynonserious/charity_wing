@@ -127,7 +127,10 @@
     background: var(--background-blur);
     overflow: hidden; /* Ensure no overflow if elements go beyond container */
 }
-
+.carousel-item img {
+    height: 100%;
+    object-fit: contain; /* Ensures full image is visible */
+  }
 .donate::before {
     content: "";
     position: absolute;
